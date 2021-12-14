@@ -13,14 +13,14 @@ namespace BlueBack.Gl
 {
 	/** Sprite
 	*/
-	#if(UNITY_EDITOR)
+	#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 	[System.Serializable]
 	#endif
 	public class Sprite
 	{
 		/** debugview
 		*/
-		#if(UNITY_EDITOR)
+		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 		public UnityEngine.GameObject debugview;
 		#endif
 
@@ -53,7 +53,7 @@ namespace BlueBack.Gl
 		public Sprite()
 		{
 			//debugview
-			#if(UNITY_EDITOR)
+			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 			this.debugview = null;
 			#endif
 

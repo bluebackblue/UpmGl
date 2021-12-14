@@ -39,17 +39,18 @@ namespace Samples.Gl.Exsample
 				this.gl = new BlueBack.Gl.Gl(in t_initparam);
 
 				//texturelist
-				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("00");
-				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("01");
+				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("red");
+				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("green");
 
 				//materialexecutelist
-				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("gl0"));
-				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("gl1"));
+				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("opaque"));
+				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("transparent"));
 			}
 
 			for(int xx=0;xx<8;xx++){
 				for(int yy=0;yy<8;yy++){
-					this.gl.spritelist.CreateSprite(0,0,new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),TIP_OFFSET_X + xx * (TIP_SIZE + 1),TIP_OFFSET_Y + yy * (TIP_SIZE + 1),TIP_SIZE,TIP_SIZE);
+					int t_texture_index = (xx + yy < 8) ? 0 : 1;
+					this.gl.spritelist.CreateSprite(0,t_texture_index,new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),TIP_OFFSET_X + xx * (TIP_SIZE + 1),TIP_OFFSET_Y + yy * (TIP_SIZE + 1),TIP_SIZE,TIP_SIZE);
 				}
 			}
 

@@ -13,7 +13,7 @@ namespace BlueBack.Gl
 {
 	/** Sprite_DebugView_MonoBehaviour
 	*/
-	#if(UNITY_EDITOR)
+	#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 	public class Sprite_DebugView_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		/** sprite

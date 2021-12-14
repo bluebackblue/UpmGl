@@ -4,7 +4,7 @@
 */
 
 
-Shader "BlueBack/Gl/Exsample/gl1"
+Shader "BlueBack/Gl/Exsample/transparent"
 {
 	Properties
 	{

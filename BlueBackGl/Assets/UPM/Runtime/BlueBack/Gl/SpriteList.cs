@@ -57,10 +57,13 @@ namespace BlueBack.Gl
 			for(int ii=0;ii<this.list.Length;ii++){
 				Sprite t_sprite = new Sprite();
 				this.list[ii] = t_sprite;
+
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 				t_sprite.debugview = new UnityEngine.GameObject("sprite");
 				t_sprite.debugview.AddComponent<Sprite_DebugView_MonoBehaviour>().sprite = t_sprite;
 				t_sprite.debugview.SetActive(false);
 				UnityEngine.GameObject.DontDestroyOnLoad(t_sprite.debugview);
+				#endif
 			}
 		}
 
@@ -78,8 +81,11 @@ namespace BlueBack.Gl
 			{
 				this.count++;
 				
-				t_item.visible = true;
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 				t_item.debugview.SetActive(true);
+				#endif
+
+				t_item.visible = true;
 				t_item.material_index = a_material_index;
 				t_item.texture_index = a_texture_index;
 				t_item.color = a_color;
