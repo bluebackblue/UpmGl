@@ -1,0 +1,57 @@
+{
+    "namespace_author":"BlueBack",
+    "namespace_package":"Gl",
+    "git_url":"https://github.com/bluebackblue/UpmGl",
+    "git_api":"https://api.github.com/repos/bluebackblue/UpmGl",
+    "git_path":"BlueBackGl/Assets/UPM",
+    "discription_simple":"ＧＬ操作",
+    "discription_detal":[
+        "スプライト表示",
+    ],
+    "keyword":[
+        "gl"
+    ],
+    "changelog":[
+        "# Changelog",
+        "",
+        "## [0.0.0] - 2021-12-13",
+        "### Changes",
+        "- Init",
+        ""
+    ],
+    "root_readmemd_path":"../../README.md",
+    "need_unity_version":"2020.1",
+    "asmdef_runtime":{
+        "define_list":[
+        ],
+        "reference_list":[
+            {
+                "use":"use",
+                "package_fullname":"BlueBack.UnityPlayerLoop",
+                "url":"https://github.com/bluebackblue/UpmUnityPlayerLoop"
+            }
+        ]
+    },
+    "asmdef_editor":{
+        "define_list":[
+        ],
+        "reference_list":[
+            {
+                "use":"use",
+                "package_fullname":"BlueBack.Gl",
+                "url":"https://github.com/bluebackblue/UpmGl"
+            }
+        ]
+    },
+    "asmdef_sample":{
+        "define_list":[
+        ],
+        "reference_list":[
+            {
+                "use":"use",
+                "package_fullname":"BlueBack.Gl",
+                "url":"https://github.com/bluebackblue/UpmGl"
+            }
+        ]
+    }
+}
