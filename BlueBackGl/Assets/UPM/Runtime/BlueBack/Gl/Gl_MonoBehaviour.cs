@@ -17,13 +17,16 @@ namespace BlueBack.Gl
 	{
 		/** spritelist
 		*/
-		public SpriteList spritelist;
+		public SpriteList[] spritelist;
 
 		/** OnPostRender
 		*/
 		private void OnPostRender()
 		{
-			this.spritelist.OnUnityPostRender();
+			int ii_max = this.spritelist.Length;
+			for(int ii=0;ii<ii_max;ii++){
+				this.spritelist[ii].UnityPostRender();
+			}
 		}
 	}
 }

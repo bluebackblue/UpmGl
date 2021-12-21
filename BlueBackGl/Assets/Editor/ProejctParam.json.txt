@@ -27,8 +27,8 @@
         "reference_list":[
             {
                 "use":"use",
-                "package_fullname":"BlueBack.UnityPlayerLoop",
-                "url":"https://github.com/bluebackblue/UpmUnityPlayerLoop"
+                "package_fullname":"BlueBack.PoolList",
+                "url":"https://github.com/bluebackblue/UpmUnityPoolList"
             }
         ]
     },

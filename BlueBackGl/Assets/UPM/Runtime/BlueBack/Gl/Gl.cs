@@ -25,7 +25,7 @@ namespace BlueBack.Gl
 
 		/** spritelist
 		*/
-		public SpriteList spritelist;
+		public SpriteList[] spritelist;
 
 		/** gl
 		*/
@@ -43,7 +43,10 @@ namespace BlueBack.Gl
 			this.materialexecutelist = new MaterialExecuteList(in a_initparam);
 
 			//spritelist
-			this.spritelist = new SpriteList(in a_initparam,this);
+			this.spritelist = new SpriteList[a_initparam.spritelist_max];
+			for(int ii=0;ii<this.spritelist.Length;ii++){
+				this.spritelist[ii] = new SpriteList(in a_initparam,this);
+			}
 
 			//gl_gameobject
 			this.gl_gameobject = new UnityEngine.GameObject("gl");
@@ -70,9 +73,13 @@ namespace BlueBack.Gl
 		{
 			//texturelist
 			this.texturelist.Dispose();
+			this.texturelist = null;
 
 			//spritelist
-			this.spritelist.Dispose();
+			foreach(SpriteList t_spritelist in this.spritelist){
+				t_spritelist.Dispose();
+			}
+			this.spritelist = null;
 
 			if(this.gl_gameobject != null){
 				UnityEngine.GameObject.Destroy(this.gl_gameobject);

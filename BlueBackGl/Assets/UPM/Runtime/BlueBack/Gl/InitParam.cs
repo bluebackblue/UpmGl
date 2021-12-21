@@ -15,6 +15,10 @@ namespace BlueBack.Gl
 	*/
 	public struct InitParam
 	{
+		/** spritelist_max
+		*/
+		public int spritelist_max;
+
 		/** texture_max
 		*/
 		public int texture_max;
@@ -40,6 +44,7 @@ namespace BlueBack.Gl
 		public static InitParam CreateDefault()
 		{
 			return new InitParam(){
+				spritelist_max = 2,
 				texture_max = 10,
 				material_max = 10,
 				sprite_max = 128,

@@ -51,10 +51,10 @@ namespace BlueBack.Gl
 			return == false : パスをセットしない。
 
 		*/
-		public bool PreSetPass(Sprite a_item)
+		public bool PreSetPass(ref SpriteBuffer a_spritebuffer)
 		{
-			if(this.current_texture_index != a_item.texture_index){
-				this.current_texture_index = a_item.texture_index;
+			if(this.current_texture_index != a_spritebuffer.texture_index){
+				this.current_texture_index = a_spritebuffer.texture_index;
 				this.material.SetTexture("_MainTex",this.texturelist[this.current_texture_index]);
 				return true;
 			}

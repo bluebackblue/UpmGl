@@ -15,35 +15,35 @@ namespace BlueBack.Gl
 	*/
 	public sealed class SpriteList : System.IDisposable
 	{
+		/** buffer
+		*/
+		public SpriteBuffer[] buffer;
+
 		/** list
 		*/
-		public Sprite[] list;
-
-		/** count
-		*/
-		public int count;
+		public BlueBack.PoolList.BufferList<SpriteIndex,SpriteBuffer> list;
 
 		/** materialexecutelist
 		*/
-		private MaterialExecute_Base[] materialexecutelist;
+		public MaterialExecute_Base[] materialexecutelist;
 
 		/** width
 		*/
-		private int width;
+		public int width;
 
 		/** height
 		*/
-		private int height;
+		public int height;
 
 		/** constructor
 		*/
 		public SpriteList(in InitParam a_initparam,Gl a_gl)
 		{
-			//list
-			this.list = new Sprite[a_initparam.sprite_max];
+			//buffer
+			this.buffer = new SpriteBuffer[a_initparam.sprite_max];
 
-			//count
-			this.count = 0;
+			//list
+			this.list = new PoolList.BufferList<SpriteIndex,SpriteBuffer>(this.buffer,()=>{return new SpriteIndex(this);});
 
 			//materialexecutelist
 			this.materialexecutelist = a_gl.materialexecutelist.list;
@@ -53,83 +53,109 @@ namespace BlueBack.Gl
 
 			//height
 			this.height = a_initparam.height;
-
-			for(int ii=0;ii<this.list.Length;ii++){
-				Sprite t_sprite = new Sprite();
-				this.list[ii] = t_sprite;
-
-				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				t_sprite.debugview = new UnityEngine.GameObject("sprite");
-				t_sprite.debugview.AddComponent<Sprite_DebugView_MonoBehaviour>().sprite = t_sprite;
-				t_sprite.debugview.SetActive(false);
-				UnityEngine.GameObject.DontDestroyOnLoad(t_sprite.debugview);
-				#endif
-			}
 		}
 
 		/** [IDisposable]Dispose。
 		*/
 		public void Dispose()
 		{
+			foreach(SpriteIndex t_spriteindex in this.list.list_free){
+				t_spriteindex.Dispose();
+			}
+			foreach(SpriteIndex t_spriteindex in this.list.list_use){
+				t_spriteindex.Dispose();
+			}
 		}
 
 		/** CreateSprite
 		*/
-		public Sprite CreateSprite(int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h)
+		public SpriteIndex CreateSprite(int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h)
 		{
-			BlueBack.Gl.Sprite t_item = this.list[this.count];
+			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 			{
-				this.count++;
-				
+				//node
+				t_node.Value.node = t_node;
+
 				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				t_item.debugview.SetActive(true);
+				t_node.Value.debugview_gameobject.SetActive(true);
+
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW_VIEWALL)
+				#else
+				t_node.Value.debugview_gameobject.hideFlags = UnityEngine.HideFlags.None;
 				#endif
 
-				t_item.visible = true;
-				t_item.material_index = a_material_index;
-				t_item.texture_index = a_texture_index;
-				t_item.color = a_color;
-				t_item.texcord[0] = 0.0f;
-				t_item.texcord[1] = 0.0f;
-				t_item.texcord[2] = 1.0f;
-				t_item.texcord[3] = 1.0f;
+				#endif
 
-				t_item.vertex[0] = (float)(a_x) / this.width;
-				t_item.vertex[1] = 1.0f - (float)(a_y) / this.height;
-				t_item.vertex[2] = (float)(a_x + a_w) / this.width;
-				t_item.vertex[3] = 1.0f - (float)(a_y) / this.height;
-				t_item.vertex[4] = (float)(a_x + a_w) / this.width;
-				t_item.vertex[5] = 1.0f - (float)(a_y + a_h) / this.height;
-				t_item.vertex[6] = (float)(a_x) / this.width;
-				t_item.vertex[7] = 1.0f - (float)(a_y + a_h) / this.height;
+				//buffer
+				this.buffer[t_node.Value.index] = new SpriteBuffer(){
+					visible = true,
+					material_index = a_material_index,
+					texture_index = a_texture_index,
+					color = a_color,
+					texcord_0 = 0.0f,
+					texcord_1 = 0.0f,
+					texcord_2 = 1.0f,
+					texcord_3 = 1.0f,
+					vertex = new float[8]{
+						(float)(a_x) / this.width,
+						1.0f - (float)(a_y) / this.height,
+						(float)(a_x + a_w) / this.width,
+						1.0f - (float)(a_y) / this.height,
+						(float)(a_x + a_w) / this.width,
+						1.0f - (float)(a_y + a_h) / this.height,
+						(float)(a_x) / this.width,
+						1.0f - (float)(a_y + a_h) / this.height,
+					},
+				};
 			}
-			return t_item;
+			return t_node.Value;
 		}
 
-		/** OnUnityPostRender
+		/** DeleteSprite
 		*/
-		public void OnUnityPostRender()
+		public void DeleteSprite(SpriteIndex a_spriteindex)
+		{
+			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+			a_spriteindex.debugview_gameobject.SetActive(false);
+
+			#if(DEF_BLUEBACK_GL_DEBUGVIEW_VIEWALL)
+			#else
+			a_spriteindex.debugview_gameobject.hideFlags = UnityEngine.HideFlags.HideInHierarchy;
+			#endif
+
+			#endif
+
+			this.list.Delete(a_spriteindex.node);
+
+			a_spriteindex.node = null;
+		}
+
+		/** UnityPostRender
+		*/
+		public void UnityPostRender()
 		{
 			int t_current_material_index = -1;
 			bool t_is_begin = false;
+
+			this.list.GcWithSwapBuffer();
 
 			{
 				UnityEngine.GL.PushMatrix();
 				{
 					UnityEngine.GL.LoadOrtho();
 
-					for(int ii=0;ii<this.count;ii++){
-						BlueBack.Gl.Sprite t_item = this.list[ii];
-						if(t_item.visible == true){
-							if(t_current_material_index != t_item.material_index){
-								t_current_material_index = t_item.material_index;
+					int ii_max = this.list.list_use.Count;
+					for(int ii=0;ii<ii_max;ii++){
+						if(this.buffer[ii].visible == true){
+							if(t_current_material_index != this.buffer[ii].material_index){
+								t_current_material_index = this.buffer[ii].material_index;
 								if(t_is_begin == true){
 									t_is_begin = false;
 									UnityEngine.GL.End();
 								}
 							}
 
-							if(this.materialexecutelist[t_current_material_index].PreSetPass(t_item) == true){
+							if(this.materialexecutelist[t_current_material_index].PreSetPass(ref this.buffer[ii]) == true){
 								if(t_is_begin == true){
 									t_is_begin = false;
 									UnityEngine.GL.End();
@@ -143,19 +169,19 @@ namespace BlueBack.Gl
 							}
 
 							if(t_is_begin == true){
-								UnityEngine.GL.Color(t_item.color);
+								UnityEngine.GL.Color(this.buffer[ii].color);
 
-								UnityEngine.GL.TexCoord2(t_item.texcord[0],t_item.texcord[3]);
-								UnityEngine.GL.Vertex3(t_item.vertex[0],t_item.vertex[1],0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_3);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[0],this.buffer[ii].vertex[1],0.0f);
 
-								UnityEngine.GL.TexCoord2(t_item.texcord[2],t_item.texcord[3]);
-								UnityEngine.GL.Vertex3(t_item.vertex[2],t_item.vertex[3],0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_3);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[2],this.buffer[ii].vertex[3],0.0f);
 
-								UnityEngine.GL.TexCoord2(t_item.texcord[2],t_item.texcord[1]);
-								UnityEngine.GL.Vertex3(t_item.vertex[4],t_item.vertex[5],0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_1);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[4],this.buffer[ii].vertex[5],0.0f);
 
-								UnityEngine.GL.TexCoord2(t_item.texcord[0],t_item.texcord[1]);
-								UnityEngine.GL.Vertex3(t_item.vertex[6],t_item.vertex[7],0.0f);	
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_1);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[6],this.buffer[ii].vertex[7],0.0f);	
 							}
 						}
 					}
@@ -168,7 +194,6 @@ namespace BlueBack.Gl
 				UnityEngine.GL.PopMatrix();
 			}
 		}
-
 	}
 }
 

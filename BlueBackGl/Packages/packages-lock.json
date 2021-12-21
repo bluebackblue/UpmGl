@@ -21,6 +21,13 @@
       "dependencies": {},
       "hash": "6c15b308a9f83abf79fd56ae4d705beb7a202fca"
     },
+    "blueback.poollist": {
+      "version": "https://github.com/bluebackblue/UpmPoolList.git?path=BlueBackPoolList/Assets/UPM#0.0.2",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "037b4022ab61cd5b5c110b53dafe0cf7e5f5629d"
+    },
     "blueback.unityplayerloop": {
       "version": "https://github.com/bluebackblue/UpmUnityPlayerLoop.git?path=BlueBackUnityPlayerLoop/Assets/UPM",
       "depth": 0,
@@ -52,7 +59,7 @@
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {
-      "version": "1.1.29",
+      "version": "1.1.30",
       "depth": 1,
       "source": "registry",
       "dependencies": {

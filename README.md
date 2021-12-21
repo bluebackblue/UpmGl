@@ -13,11 +13,11 @@ MIT License
 * https://github.com/bluebackblue/UpmGl
 
 ## 動作確認
-Unity 2021.2.0b16
+Unity 2022.1.0b2
 
 ## UPM
 ### 最新
-* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.2
+* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.3
 ### 開発
 * https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM
 

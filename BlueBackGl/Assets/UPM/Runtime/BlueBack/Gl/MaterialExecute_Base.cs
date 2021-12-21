@@ -20,7 +20,7 @@ namespace BlueBack.Gl
 			return == false : パスをセットしない。
 
 		*/
-		bool PreSetPass(Sprite a_item);
+		bool PreSetPass(ref SpriteBuffer a_spritebuffer);
 
 		/** [BlueBack.Gl.MaterialExecute_Base]SetPass
 		*/

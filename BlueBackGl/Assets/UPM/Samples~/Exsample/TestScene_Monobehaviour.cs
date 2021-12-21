@@ -30,6 +30,7 @@ namespace Samples.Gl.Exsample
 			{
 				BlueBack.Gl.InitParam t_initparam = BlueBack.Gl.InitParam.CreateDefault();
 				{
+					t_initparam.spritelist_max = 2;
 					t_initparam.texture_max = 2;
 					t_initparam.material_max = 2;
 					t_initparam.sprite_max = 100;
@@ -50,7 +51,10 @@ namespace Samples.Gl.Exsample
 			for(int xx=0;xx<8;xx++){
 				for(int yy=0;yy<8;yy++){
 					int t_texture_index = (xx + yy < 8) ? 0 : 1;
-					this.gl.spritelist.CreateSprite(0,t_texture_index,new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),TIP_OFFSET_X + xx * (TIP_SIZE + 1),TIP_OFFSET_Y + yy * (TIP_SIZE + 1),TIP_SIZE,TIP_SIZE);
+					BlueBack.Gl.SpriteIndex t_spriteindex = this.gl.spritelist[0].CreateSprite(0,t_texture_index,new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),TIP_OFFSET_X + xx * (TIP_SIZE + 1),TIP_OFFSET_Y + yy * (TIP_SIZE + 1),TIP_SIZE,TIP_SIZE);
+					#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+					t_spriteindex.SetDebugName(xx.ToString() + "_" + yy.ToString());
+					#endif
 				}
 			}
 
