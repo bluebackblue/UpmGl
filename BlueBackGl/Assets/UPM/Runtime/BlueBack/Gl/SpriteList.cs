@@ -81,7 +81,7 @@ namespace BlueBack.Gl
 				float t_x1 = (float)a_x / a_screen_w;
 				float t_y1 = 1.0f - (float)a_y / a_screen_h;
 				float t_x2 = t_x1 + (float)a_w / a_screen_w;
-				float t_y2 = t_y1 + (float)a_h / a_screen_h;
+				float t_y2 = t_y1 - (float)a_h / a_screen_h;
 
 				//buffer
 				this.buffer[t_node.Value.index] = new SpriteBuffer(){

@@ -127,10 +127,10 @@ namespace BlueBack.Gl
 			this.material_index = a_spritebuffer.material_index;
 			this.texture_index = a_spritebuffer.texture_index;
 			this.color = a_spritebuffer.color;
-			this.vertex_x1 = a_spritebuffer.texcord_x1;
-			this.vertex_y1 = a_spritebuffer.texcord_y1;
-			this.vertex_x2 = a_spritebuffer.texcord_x2;
-			this.vertex_y2 = a_spritebuffer.texcord_y2;
+			this.texcord_x1 = a_spritebuffer.texcord_x1;
+			this.texcord_y1 = a_spritebuffer.texcord_y1;
+			this.texcord_x2 = a_spritebuffer.texcord_x2;
+			this.texcord_y2 = a_spritebuffer.texcord_y2;
 			this.vertex_x1 = a_spritebuffer.vertex_x1 * this.screen_w;
 			this.vertex_y1 = this.screen_h - a_spritebuffer.vertex_y1 * this.screen_h;
 			this.vertex_x2 = a_spritebuffer.vertex_x2 * this.screen_w;
