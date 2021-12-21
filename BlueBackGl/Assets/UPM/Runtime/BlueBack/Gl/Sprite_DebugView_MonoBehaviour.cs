@@ -16,6 +16,8 @@ namespace BlueBack.Gl
 	#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 	public class Sprite_DebugView_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
+		#if(UNITY_EDITOR)
+
 		/** spriteindex
 		*/
 		public SpriteIndex spriteindex;
@@ -144,6 +146,8 @@ namespace BlueBack.Gl
 				this.mode = Mode.Read;
 			}
 		}
+
+		#endif
 	}
 	#endif
 }
