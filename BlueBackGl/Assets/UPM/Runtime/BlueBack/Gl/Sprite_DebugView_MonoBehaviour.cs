@@ -107,18 +107,18 @@ namespace BlueBack.Gl
 						this.material_index = this.spritelist.buffer[this.spriteindex.index].material_index;
 						this.texture_index = this.spritelist.buffer[this.spriteindex.index].texture_index;
 						this.color = this.spritelist.buffer[this.spriteindex.index].color;
-						this.texcord.x1 = this.spritelist.buffer[this.spriteindex.index].texcord_0;
-						this.texcord.y1 = this.spritelist.buffer[this.spriteindex.index].texcord_1;
-						this.texcord.x2 = this.spritelist.buffer[this.spriteindex.index].texcord_2;
-						this.texcord.y2 = this.spritelist.buffer[this.spriteindex.index].texcord_3;
-						this.vertex.x1 = this.spritelist.buffer[this.spriteindex.index].vertex_0 * this.spritelist.width;
-						this.vertex.y1 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_1 * this.spritelist.height;
-						this.vertex.x2 = this.spritelist.buffer[this.spriteindex.index].vertex_2 * this.spritelist.width;
-						this.vertex.y2 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_3 * this.spritelist.height;
-						this.vertex.x3 = this.spritelist.buffer[this.spriteindex.index].vertex_4 * this.spritelist.width;
-						this.vertex.y3 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_5 * this.spritelist.height;
-						this.vertex.x4 = this.spritelist.buffer[this.spriteindex.index].vertex_6 * this.spritelist.width;
-						this.vertex.y4 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_7 * this.spritelist.height;
+						this.texcord.x1 = this.spritelist.buffer[this.spriteindex.index].texcord_x1;
+						this.texcord.y1 = this.spritelist.buffer[this.spriteindex.index].texcord_y1;
+						this.texcord.x2 = this.spritelist.buffer[this.spriteindex.index].texcord_x2;
+						this.texcord.y2 = this.spritelist.buffer[this.spriteindex.index].texcord_y2;
+						this.vertex.x1 = this.spritelist.buffer[this.spriteindex.index].vertex_x1 * this.spritelist.width;
+						this.vertex.y1 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_y1 * this.spritelist.height;
+						this.vertex.x2 = this.spritelist.buffer[this.spriteindex.index].vertex_x2 * this.spritelist.width;
+						this.vertex.y2 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_y2 * this.spritelist.height;
+						this.vertex.x3 = this.spritelist.buffer[this.spriteindex.index].vertex_x3 * this.spritelist.width;
+						this.vertex.y3 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_y3 * this.spritelist.height;
+						this.vertex.x4 = this.spritelist.buffer[this.spriteindex.index].vertex_x4 * this.spritelist.width;
+						this.vertex.y4 = this.spritelist.height - this.spritelist.buffer[this.spriteindex.index].vertex_y4 * this.spritelist.height;
 
 					}break;
 				case Mode.Write:
@@ -127,18 +127,18 @@ namespace BlueBack.Gl
 						this.spritelist.buffer[this.spriteindex.index].material_index = this.material_index;
 						this.spritelist.buffer[this.spriteindex.index].texture_index = this.texture_index;
 						this.spritelist.buffer[this.spriteindex.index].color = this.color;
-						this.spritelist.buffer[this.spriteindex.index].texcord_0 = this.texcord.x1;
-						this.spritelist.buffer[this.spriteindex.index].texcord_1 = this.texcord.y1;
-						this.spritelist.buffer[this.spriteindex.index].texcord_2 = this.texcord.x2;
-						this.spritelist.buffer[this.spriteindex.index].texcord_3 = this.texcord.y2;
-						this.spritelist.buffer[this.spriteindex.index].vertex_0 = this.vertex.x1 / this.spritelist.width;
-						this.spritelist.buffer[this.spriteindex.index].vertex_1 = 1.0f - this.vertex.y1 / this.spritelist.height;
-						this.spritelist.buffer[this.spriteindex.index].vertex_2 = this.vertex.x2 / this.spritelist.width;
-						this.spritelist.buffer[this.spriteindex.index].vertex_3 = 1.0f - this.vertex.y2 / this.spritelist.height;
-						this.spritelist.buffer[this.spriteindex.index].vertex_4 = this.vertex.x3 / this.spritelist.width;
-						this.spritelist.buffer[this.spriteindex.index].vertex_5 = 1.0f - this.vertex.y3 / this.spritelist.height;
-						this.spritelist.buffer[this.spriteindex.index].vertex_6 = this.vertex.x4 / this.spritelist.width;
-						this.spritelist.buffer[this.spriteindex.index].vertex_7 = 1.0f - this.vertex.y4 / this.spritelist.height;
+						this.spritelist.buffer[this.spriteindex.index].texcord_x1 = this.texcord.x1;
+						this.spritelist.buffer[this.spriteindex.index].texcord_y1 = this.texcord.y1;
+						this.spritelist.buffer[this.spriteindex.index].texcord_x2 = this.texcord.x2;
+						this.spritelist.buffer[this.spriteindex.index].texcord_y2 = this.texcord.y2;
+						this.spritelist.buffer[this.spriteindex.index].vertex_x1 = this.vertex.x1 / this.spritelist.width;
+						this.spritelist.buffer[this.spriteindex.index].vertex_y1 = 1.0f - this.vertex.y1 / this.spritelist.height;
+						this.spritelist.buffer[this.spriteindex.index].vertex_x2 = this.vertex.x2 / this.spritelist.width;
+						this.spritelist.buffer[this.spriteindex.index].vertex_y2 = 1.0f - this.vertex.y2 / this.spritelist.height;
+						this.spritelist.buffer[this.spriteindex.index].vertex_x3 = this.vertex.x3 / this.spritelist.width;
+						this.spritelist.buffer[this.spriteindex.index].vertex_y3 = 1.0f - this.vertex.y3 / this.spritelist.height;
+						this.spritelist.buffer[this.spriteindex.index].vertex_x4 = this.vertex.x4 / this.spritelist.width;
+						this.spritelist.buffer[this.spriteindex.index].vertex_y4 = 1.0f - this.vertex.y4 / this.spritelist.height;
 					}break;
 				}
 			}else{

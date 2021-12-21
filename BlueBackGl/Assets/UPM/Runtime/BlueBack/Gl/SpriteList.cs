@@ -77,13 +77,7 @@ namespace BlueBack.Gl
 				t_node.Value.node = t_node;
 
 				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				t_node.Value.debugview_gameobject.SetActive(true);
-
-				#if(DEF_BLUEBACK_GL_DEBUGVIEW_VIEWALL)
-				#else
-				t_node.Value.debugview_gameobject.hideFlags = UnityEngine.HideFlags.None;
-				#endif
-
+				t_node.Value.SetDebugActive(true);
 				#endif
 
 				//buffer
@@ -92,18 +86,18 @@ namespace BlueBack.Gl
 					material_index = a_material_index,
 					texture_index = a_texture_index,
 					color = a_color,
-					texcord_0 = 0.0f,
-					texcord_1 = 0.0f,
-					texcord_2 = 1.0f,
-					texcord_3 = 1.0f,
-					vertex_0 = (float)(a_x) / this.width,
-					vertex_1 = 1.0f - (float)(a_y) / this.height,
-					vertex_2 = (float)(a_x + a_w) / this.width,
-					vertex_3 = 1.0f - (float)(a_y) / this.height,
-					vertex_4 = (float)(a_x + a_w) / this.width,
-					vertex_5 = 1.0f - (float)(a_y + a_h) / this.height,
-					vertex_6 = (float)(a_x) / this.width,
-					vertex_7 = 1.0f - (float)(a_y + a_h) / this.height,
+					texcord_x1 = 0.0f,
+					texcord_y1 = 0.0f,
+					texcord_x2 = 1.0f,
+					texcord_y2 = 1.0f,
+					vertex_x1 = (float)(a_x) / this.width,
+					vertex_y1 = 1.0f - (float)(a_y) / this.height,
+					vertex_x2 = (float)(a_x + a_w) / this.width,
+					vertex_y2 = 1.0f - (float)(a_y) / this.height,
+					vertex_x3 = (float)(a_x + a_w) / this.width,
+					vertex_y3 = 1.0f - (float)(a_y + a_h) / this.height,
+					vertex_x4 = (float)(a_x) / this.width,
+					vertex_y4 = 1.0f - (float)(a_y + a_h) / this.height,
 				};
 			}
 			return t_node.Value;
@@ -114,13 +108,7 @@ namespace BlueBack.Gl
 		public void DeleteSprite(SpriteIndex a_spriteindex)
 		{
 			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-			a_spriteindex.debugview_gameobject.SetActive(false);
-
-			#if(DEF_BLUEBACK_GL_DEBUGVIEW_VIEWALL)
-			#else
-			a_spriteindex.debugview_gameobject.hideFlags = UnityEngine.HideFlags.HideInHierarchy;
-			#endif
-
+			a_spriteindex.SetDebugActive(false);
 			#endif
 
 			this.list.Delete(a_spriteindex.node);
@@ -169,17 +157,17 @@ namespace BlueBack.Gl
 							if(t_is_begin == true){
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_3);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_0,this.buffer[ii].vertex_1,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_x1,this.buffer[ii].texcord_y2);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x1,this.buffer[ii].vertex_y1,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_3);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_2,this.buffer[ii].vertex_3,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_x2,this.buffer[ii].texcord_y2);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x2,this.buffer[ii].vertex_y2,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_4,this.buffer[ii].vertex_5,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_x2,this.buffer[ii].texcord_y1);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x3,this.buffer[ii].vertex_y3,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_6,this.buffer[ii].vertex_7,0.0f);	
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_x1,this.buffer[ii].texcord_y1);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x4,this.buffer[ii].vertex_y4,0.0f);	
 							}
 						}
 					}
