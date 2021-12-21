@@ -96,16 +96,14 @@ namespace BlueBack.Gl
 					texcord_1 = 0.0f,
 					texcord_2 = 1.0f,
 					texcord_3 = 1.0f,
-					vertex = new float[8]{
-						(float)(a_x) / this.width,
-						1.0f - (float)(a_y) / this.height,
-						(float)(a_x + a_w) / this.width,
-						1.0f - (float)(a_y) / this.height,
-						(float)(a_x + a_w) / this.width,
-						1.0f - (float)(a_y + a_h) / this.height,
-						(float)(a_x) / this.width,
-						1.0f - (float)(a_y + a_h) / this.height,
-					},
+					vertex_0 = (float)(a_x) / this.width,
+					vertex_1 = 1.0f - (float)(a_y) / this.height,
+					vertex_2 = (float)(a_x + a_w) / this.width,
+					vertex_3 = 1.0f - (float)(a_y) / this.height,
+					vertex_4 = (float)(a_x + a_w) / this.width,
+					vertex_5 = 1.0f - (float)(a_y + a_h) / this.height,
+					vertex_6 = (float)(a_x) / this.width,
+					vertex_7 = 1.0f - (float)(a_y + a_h) / this.height,
 				};
 			}
 			return t_node.Value;
@@ -172,16 +170,16 @@ namespace BlueBack.Gl
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
 								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_3);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[0],this.buffer[ii].vertex[1],0.0f);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_0,this.buffer[ii].vertex_1,0.0f);
 
 								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_3);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[2],this.buffer[ii].vertex[3],0.0f);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_2,this.buffer[ii].vertex_3,0.0f);
 
 								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2,this.buffer[ii].texcord_1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[4],this.buffer[ii].vertex[5],0.0f);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_4,this.buffer[ii].vertex_5,0.0f);
 
 								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_0,this.buffer[ii].texcord_1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex[6],this.buffer[ii].vertex[7],0.0f);	
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_6,this.buffer[ii].vertex_7,0.0f);	
 							}
 						}
 					}

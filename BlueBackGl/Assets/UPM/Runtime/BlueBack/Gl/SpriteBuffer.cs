@@ -40,7 +40,14 @@ namespace BlueBack.Gl
 			
 		/** vertex
 		*/
-		public float[] vertex;
+		public float vertex_0;
+		public float vertex_1;
+		public float vertex_2;
+		public float vertex_3;
+		public float vertex_4;
+		public float vertex_5;
+		public float vertex_6;
+		public float vertex_7;
 	}
 }
 
