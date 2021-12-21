@@ -22,7 +22,7 @@ namespace BlueBack.Gl
 			float t_x1 = (float)a_x / a_screen_w;
 			float t_y1 = 1.0f - (float)a_y / a_screen_h;
 			float t_x2 = t_x1 + (float)a_w / a_screen_w;
-			float t_y2 = t_y1 + (float)a_h / a_screen_h;
+			float t_y2 = t_y1 - (float)a_h / a_screen_h;
 			a_spritebuffer.vertex_x1 = t_x1;
 			a_spritebuffer.vertex_y1 = t_y1;
 			a_spritebuffer.vertex_x2 = t_x2;
