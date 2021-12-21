@@ -27,14 +27,6 @@ namespace BlueBack.Gl
 		*/
 		public MaterialExecute_Base[] materialexecutelist;
 
-		/** width
-		*/
-		public int width;
-
-		/** height
-		*/
-		public int height;
-
 		/** constructor
 		*/
 		public SpriteList(in InitParam a_initparam,Gl a_gl)
@@ -42,17 +34,23 @@ namespace BlueBack.Gl
 			//buffer
 			this.buffer = new SpriteBuffer[a_initparam.sprite_max];
 
+			//screen
+			int t_screen_w = a_initparam.screen_w;
+			int t_screen_h = a_initparam.screen_h;
+
 			//list
-			this.list = new PoolList.BufferList<SpriteIndex,SpriteBuffer>(this.buffer,()=>{return new SpriteIndex(this);});
+			this.list = new PoolList.BufferList<SpriteIndex,SpriteBuffer>(this.buffer,()=>{
+				SpriteIndex t_spriteindex = new SpriteIndex(this);
+
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+				t_spriteindex.SetDebugScreenSize(t_screen_w,t_screen_h);
+				#endif
+
+				return t_spriteindex;
+			});
 
 			//materialexecutelist
 			this.materialexecutelist = a_gl.materialexecutelist.list;
-
-			//width
-			this.width = a_initparam.width;
-
-			//height
-			this.height = a_initparam.height;
 		}
 
 		/** [IDisposable]Dispose。
@@ -69,7 +67,7 @@ namespace BlueBack.Gl
 
 		/** CreateSprite
 		*/
-		public SpriteIndex CreateSprite(int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h)
+		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h,int a_screen_w,int a_screen_h)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 			{
@@ -80,9 +78,14 @@ namespace BlueBack.Gl
 				t_node.Value.SetDebugActive(true);
 				#endif
 
+				float t_x1 = (float)a_x / a_screen_w;
+				float t_y1 = 1.0f - (float)a_y / a_screen_h;
+				float t_x2 = t_x1 + (float)a_w / a_screen_w;
+				float t_y2 = t_y1 + (float)a_h / a_screen_h;
+
 				//buffer
 				this.buffer[t_node.Value.index] = new SpriteBuffer(){
-					visible = true,
+					visible = a_visible,
 					material_index = a_material_index,
 					texture_index = a_texture_index,
 					color = a_color,
@@ -90,14 +93,14 @@ namespace BlueBack.Gl
 					texcord_y1 = 0.0f,
 					texcord_x2 = 1.0f,
 					texcord_y2 = 1.0f,
-					vertex_x1 = (float)(a_x) / this.width,
-					vertex_y1 = 1.0f - (float)(a_y) / this.height,
-					vertex_x2 = (float)(a_x + a_w) / this.width,
-					vertex_y2 = 1.0f - (float)(a_y) / this.height,
-					vertex_x3 = (float)(a_x + a_w) / this.width,
-					vertex_y3 = 1.0f - (float)(a_y + a_h) / this.height,
-					vertex_x4 = (float)(a_x) / this.width,
-					vertex_y4 = 1.0f - (float)(a_y + a_h) / this.height,
+					vertex_x1 = t_x1,
+					vertex_y1 = t_y1,
+					vertex_x2 = t_x2,
+					vertex_y2 = t_y1,
+					vertex_x3 = t_x2,
+					vertex_y3 = t_y2,
+					vertex_x4 = t_x1,
+					vertex_y4 = t_y2,
 				};
 			}
 			return t_node.Value;

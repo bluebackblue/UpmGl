@@ -31,13 +31,10 @@ namespace BlueBack.Gl
 		*/
 		public int sprite_max;
 
-		/** width
+		/** screen
 		*/
-		public int width;
-
-		/** height
-		*/
-		public int height;
+		public int screen_w;
+		public int screen_h;
 
 		/** CreateDefault
 		*/
@@ -48,8 +45,8 @@ namespace BlueBack.Gl
 				texture_max = 10,
 				material_max = 10,
 				sprite_max = 128,
-				width = 1280,
-				height = 720,
+				screen_w = 1280,
+				screen_h = 720,
 			};
 		}
 	}
