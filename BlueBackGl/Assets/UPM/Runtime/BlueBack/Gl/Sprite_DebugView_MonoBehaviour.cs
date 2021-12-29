@@ -45,10 +45,19 @@ namespace BlueBack.Gl
 		*/
 		public bool visible;
 
+		/** screenparam
+		*/
+		public static ScreenParam s_screenparam;
+
 		/** screen
 		*/
-		public int screen_w;
-		public int screen_h;
+		public int screen_virtual_w_pix;
+		public int screen_virtual_h_pix;
+		public float screen_x;
+		public float screen_y;
+		public float screen_scale_w;
+		public float screen_scale_h;
+
 
 		/** material_index
 		*/
@@ -111,18 +120,24 @@ namespace BlueBack.Gl
 			#endif
 		}
 
-		/** SetScreenSize
+		/** SetScreenParam
 		*/
-		public void SetScreenSize(int a_screen_w,int a_screen_h)
+		public static void SetScreenParam(in ScreenParam a_screenparam)
 		{
-			this.screen_w = a_screen_w;
-			this.screen_h = a_screen_h;
+			s_screenparam = a_screenparam;
 		}
 
 		/** Read
 		*/
 		private void Read(ref SpriteBuffer a_spritebuffer)
 		{
+			this.screen_virtual_w_pix = (int)(1.0f / s_screenparam.virtual_w_pix_inv);
+			this.screen_virtual_h_pix = (int)(1.0f / s_screenparam.virtual_h_pix_inv);
+			this.screen_x = s_screenparam.offset_x;
+			this.screen_y = s_screenparam.offset_y;
+			this.screen_scale_w = s_screenparam.scale_w;
+			this.screen_scale_h = s_screenparam.scale_h;
+
 			this.visible = a_spritebuffer.visible;
 			this.material_index = a_spritebuffer.material_index;
 			this.texture_index = a_spritebuffer.texture_index;
@@ -131,14 +146,14 @@ namespace BlueBack.Gl
 			this.texcord_y1 = a_spritebuffer.texcord_y1;
 			this.texcord_x2 = a_spritebuffer.texcord_x2;
 			this.texcord_y2 = a_spritebuffer.texcord_y2;
-			this.vertex_x1 = a_spritebuffer.vertex_x1 * this.screen_w;
-			this.vertex_y1 = this.screen_h - a_spritebuffer.vertex_y1 * this.screen_h;
-			this.vertex_x2 = a_spritebuffer.vertex_x2 * this.screen_w;
-			this.vertex_y2 = this.screen_h - a_spritebuffer.vertex_y2 * this.screen_h;
-			this.vertex_x3 = a_spritebuffer.vertex_x3 * this.screen_w;
-			this.vertex_y3 = this.screen_h - a_spritebuffer.vertex_y3 * this.screen_h;
-			this.vertex_x4 = a_spritebuffer.vertex_x4 * this.screen_w;
-			this.vertex_y4 = this.screen_h - a_spritebuffer.vertex_y4 * this.screen_h;
+			this.vertex_x1 = (a_spritebuffer.vertex_x1 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
+			this.vertex_x2 = (a_spritebuffer.vertex_x2 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
+			this.vertex_x3 = (a_spritebuffer.vertex_x3 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
+			this.vertex_x4 = (a_spritebuffer.vertex_x4 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
+			this.vertex_y1 = (1.0f - (a_spritebuffer.vertex_y1 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
+			this.vertex_y2 = (1.0f - (a_spritebuffer.vertex_y2 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
+			this.vertex_y3 = (1.0f - (a_spritebuffer.vertex_y3 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
+			this.vertex_y4 = (1.0f - (a_spritebuffer.vertex_y4 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
 		}
 
 		/** Write
@@ -153,16 +168,17 @@ namespace BlueBack.Gl
 			a_spritebuffer.texcord_y1 = this.texcord_y1;
 			a_spritebuffer.texcord_x2 = this.texcord_x2;
 			a_spritebuffer.texcord_y2 = this.texcord_y2;
-			a_spritebuffer.vertex_x1 = this.vertex_x1 / this.screen_w;
-			a_spritebuffer.vertex_y1 = 1.0f - this.vertex_y1 / this.screen_h;
-			a_spritebuffer.vertex_x2 = this.vertex_x2 / this.screen_w;
-			a_spritebuffer.vertex_y2 = 1.0f - this.vertex_y2 / this.screen_h;
-			a_spritebuffer.vertex_x3 = this.vertex_x3 / this.screen_w;
-			a_spritebuffer.vertex_y3 = 1.0f - this.vertex_y3 / this.screen_h;
-			a_spritebuffer.vertex_x4 = this.vertex_x4 / this.screen_w;
-			a_spritebuffer.vertex_y4 = 1.0f - this.vertex_y4 / this.screen_h;
+			a_spritebuffer.vertex_x1 = s_screenparam.offset_x + (this.vertex_x1 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
+			a_spritebuffer.vertex_x2 = s_screenparam.offset_x + (this.vertex_x2 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
+			a_spritebuffer.vertex_x3 = s_screenparam.offset_x + (this.vertex_x3 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
+			a_spritebuffer.vertex_x4 = s_screenparam.offset_x + (this.vertex_x4 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
+			a_spritebuffer.vertex_y1 = s_screenparam.offset_y + (1.0f - this.vertex_y1 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
+			a_spritebuffer.vertex_y2 = s_screenparam.offset_y + (1.0f - this.vertex_y2 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
+			a_spritebuffer.vertex_y3 = s_screenparam.offset_y + (1.0f - this.vertex_y3 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
+			a_spritebuffer.vertex_y4 = s_screenparam.offset_y + (1.0f - this.vertex_y4 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
 		}
 	}
 	#endif
 }
 
+ 

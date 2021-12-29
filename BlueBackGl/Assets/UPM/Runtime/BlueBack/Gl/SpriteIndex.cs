@@ -84,19 +84,10 @@ namespace BlueBack.Gl
 			#endif
 		}
 
-		/** SetDebugScreenSize
+		/** 「DebugView」用。
 		*/
 		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-		public void SetDebugScreenSize(int a_screen_w,int a_screen_h)
-		{
-			this.debugview_monobehaviour.SetScreenSize(a_screen_w,a_screen_h);
-		}
-		#endif
-
-		/** SetDebugName
-		*/
-		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-		public void SetDebugName(string a_debugname)
+		public void SetDebugViewName(string a_debugname)
 		{
 			if(this.debugview_gameobject != null){
 				this.debugview_gameobject.name = a_debugname;
@@ -104,10 +95,10 @@ namespace BlueBack.Gl
 		}
 		#endif
 
-		/** SetDebugActive
+		/** SetDebugViewActive
 		*/
 		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-		public void SetDebugActive(bool a_flag)
+		public void SetDebugViewActive(bool a_flag)
 		{
 			if(this.debugview_gameobject != null){
 				this.debugview_gameobject.SetActive(a_flag);

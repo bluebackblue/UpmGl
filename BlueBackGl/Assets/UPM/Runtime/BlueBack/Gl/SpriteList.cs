@@ -34,19 +34,9 @@ namespace BlueBack.Gl
 			//buffer
 			this.buffer = new SpriteBuffer[a_initparam.sprite_max];
 
-			//screen
-			int t_screen_w = a_initparam.screen_w;
-			int t_screen_h = a_initparam.screen_h;
-
 			//list
 			this.list = new PoolList.BufferList<SpriteIndex,SpriteBuffer>(this.buffer,()=>{
-				SpriteIndex t_spriteindex = new SpriteIndex(this);
-
-				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				t_spriteindex.SetDebugScreenSize(t_screen_w,t_screen_h);
-				#endif
-
-				return t_spriteindex;
+				return new SpriteIndex(this);
 			});
 
 			//materialexecutelist
@@ -67,7 +57,7 @@ namespace BlueBack.Gl
 
 		/** CreateSprite
 		*/
-		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h,int a_screen_w,int a_screen_h)
+		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 			{
@@ -75,13 +65,13 @@ namespace BlueBack.Gl
 				t_node.Value.node = t_node;
 
 				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				t_node.Value.SetDebugActive(true);
+				t_node.Value.SetDebugViewActive(true);
 				#endif
 
-				float t_x1 = (float)a_x / a_screen_w;
-				float t_y1 = 1.0f - (float)a_y / a_screen_h;
-				float t_x2 = t_x1 + (float)a_w / a_screen_w;
-				float t_y2 = t_y1 - (float)a_h / a_screen_h;
+				float t_x1 = ((float)a_x * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
+				float t_y1 = (1.0f - ((float)a_y * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
+				float t_x2 = t_x1 + ((float)a_w * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
+				float t_y2 = (t_y1 - ((float)a_h * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
 
 				//buffer
 				this.buffer[t_node.Value.index] = new SpriteBuffer(){
@@ -93,14 +83,14 @@ namespace BlueBack.Gl
 					texcord_y1 = 0.0f,
 					texcord_x2 = 1.0f,
 					texcord_y2 = 1.0f,
-					vertex_x1 = t_x1,
-					vertex_y1 = t_y1,
-					vertex_x2 = t_x2,
-					vertex_y2 = t_y1,
-					vertex_x3 = t_x2,
-					vertex_y3 = t_y2,
-					vertex_x4 = t_x1,
-					vertex_y4 = t_y2,
+					vertex_x1 = t_x1 + a_screenparam.offset_x,
+					vertex_y1 = t_y1 - a_screenparam.offset_y,
+					vertex_x2 = t_x2 + a_screenparam.offset_x,
+					vertex_y2 = t_y1 - a_screenparam.offset_y,
+					vertex_x3 = t_x2 + a_screenparam.offset_x,
+					vertex_y3 = t_y2 - a_screenparam.offset_y,
+					vertex_x4 = t_x1 + a_screenparam.offset_x,
+					vertex_y4 = t_y2 - a_screenparam.offset_y,
 				};
 			}
 			return t_node.Value;
@@ -111,7 +101,7 @@ namespace BlueBack.Gl
 		public void DeleteSprite(SpriteIndex a_spriteindex)
 		{
 			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-			a_spriteindex.SetDebugActive(false);
+			a_spriteindex.SetDebugViewActive(false);
 			#endif
 
 			this.list.Delete(a_spriteindex.node);
