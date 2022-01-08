@@ -55,11 +55,11 @@ namespace BlueBack.Gl
 			//gl_camera
 			this.gl_camera = this.gl_gameobject.AddComponent<UnityEngine.Camera>();
 			this.gl_camera.Reset();
-			this.gl_camera.depth = 0.0f;
+			this.gl_camera.depth = a_initparam.camera_depth;
 			this.gl_camera.orthographic = true;
-			this.gl_camera.clearFlags = UnityEngine.CameraClearFlags.SolidColor;
-			this.gl_camera.backgroundColor = new UnityEngine.Color(0.0f,0.0f,0.0f,1.0f);
-			this.gl_camera.cullingMask = 0;
+			this.gl_camera.clearFlags = a_initparam.camera_clearflag;
+			this.gl_camera.backgroundColor = a_initparam.camera_bgcolor;
+			this.gl_camera.cullingMask = a_initparam.camera_cullingmask;
 			this.gl_camera.useOcclusionCulling = false;
 
 			//gl_monobehaviour

@@ -31,6 +31,22 @@ namespace BlueBack.Gl
 		*/
 		public int sprite_max;
 
+		/** camera_depth
+		*/
+		public float camera_depth;
+
+		/** camera_cullingmask
+		*/
+		public int camera_cullingmask;
+
+		/** camera_clearflag
+		*/
+		public UnityEngine.CameraClearFlags camera_clearflag;
+
+		/** camera_bgcolor
+		*/
+		public UnityEngine.Color camera_bgcolor;
+
 		/** CreateDefault
 		*/
 		public static InitParam CreateDefault()
@@ -40,6 +56,10 @@ namespace BlueBack.Gl
 				texture_max = 10,
 				material_max = 10,
 				sprite_max = 128,
+				camera_depth = 0.0f,
+				camera_cullingmask = 0,
+				camera_clearflag = UnityEngine.CameraClearFlags.SolidColor,
+				camera_bgcolor = new UnityEngine.Color(0.0f,0.0f,0.0f,1.0f),
 			};
 		}
 	}
