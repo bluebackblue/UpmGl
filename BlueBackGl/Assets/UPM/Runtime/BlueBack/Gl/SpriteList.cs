@@ -57,6 +57,42 @@ namespace BlueBack.Gl
 
 		/** CreateSprite
 		*/
+		public SpriteIndex CreateSprite()
+		{
+			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
+			{
+				//node
+				t_node.Value.node = t_node;
+
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+				t_node.Value.SetDebugViewActive(true);
+				#endif
+
+				//buffer
+				this.buffer[t_node.Value.index] = new SpriteBuffer(){
+					visible = false,
+					material_index = -1,
+					texture_index = -1,
+					color = new UnityEngine.Color(1,1,1,1),
+					texcord_x1 = 0.0f,
+					texcord_y1 = 0.0f,
+					texcord_x2 = 1.0f,
+					texcord_y2 = 1.0f,
+					vertex_x1 = 0,
+					vertex_y1 = 0,
+					vertex_x2 = 0,
+					vertex_y2 = 0,
+					vertex_x3 = 0,
+					vertex_y3 = 0,
+					vertex_x4 = 0,
+					vertex_y4 = 0,
+				};
+			}
+			return t_node.Value;
+		}
+
+		/** CreateSprite
+		*/
 		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();

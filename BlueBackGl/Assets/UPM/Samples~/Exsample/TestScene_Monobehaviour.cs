@@ -195,7 +195,7 @@ namespace Samples.Gl.Exsample
 				int ii_max = this.list.Count;
 				for(int ii=0;ii<ii_max;ii++){
 					Item t_item = this.list[ii];
-					BlueBack.Gl.SpriteTool.SetXYWH(ref t_item.spriteindex.spritelist.buffer[t_item.spriteindex.index],t_item.x,t_item.y,t_item.w,t_item.h,in this.screenparam);
+					BlueBack.Gl.SpriteTool.SetXYWH(t_item.spriteindex,t_item.x,t_item.y,t_item.w,t_item.h,in this.screenparam);
 				}
 			}
 		}
