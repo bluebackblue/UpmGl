@@ -75,13 +75,13 @@ namespace BlueBack.Gl
 					texture_index = -1,
 					color = new UnityEngine.Color(1,1,1,1),
 					texcord_1_x1 = 0.0f,
-					texcord_1_y2 = 1.0f,
+					texcord_1_y1 = 1.0f,
 					texcord_2_x2 = 1.0f,
-					texcord_2_y2 = 1.0f,
+					texcord_2_y1 = 1.0f,
 					texcord_3_x2 = 1.0f,
-					texcord_3_y1 = 0.0f,
+					texcord_3_y2 = 0.0f,
 					texcord_4_x1 = 0.0f,
-					texcord_4_y1 = 0.0f,
+					texcord_4_y2 = 0.0f,
 					vertex_x1 = 0,
 					vertex_y1 = 0,
 					vertex_x2 = 0,
@@ -120,13 +120,13 @@ namespace BlueBack.Gl
 					texture_index = a_texture_index,
 					color = a_color,
 					texcord_1_x1 = 0.0f,
-					texcord_1_y2 = 1.0f,
+					texcord_1_y1 = 1.0f,
 					texcord_2_x2 = 1.0f,
-					texcord_2_y2 = 1.0f,
+					texcord_2_y1 = 1.0f,
 					texcord_3_x2 = 1.0f,
-					texcord_3_y1 = 0.0f,
+					texcord_3_y2 = 0.0f,
 					texcord_4_x1 = 0.0f,
-					texcord_4_y1 = 0.0f,
+					texcord_4_y2 = 0.0f,
 					vertex_x1 = t_x1 + a_screenparam.offset_x,
 					vertex_y1 = t_y1 - a_screenparam.offset_y,
 					vertex_x2 = t_x2 + a_screenparam.offset_x,
@@ -194,16 +194,16 @@ namespace BlueBack.Gl
 							if(t_is_begin == true){
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_1_x1,this.buffer[ii].texcord_1_y2);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_1_x1,this.buffer[ii].texcord_1_y1);
 								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x1,this.buffer[ii].vertex_y1,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2_x2,this.buffer[ii].texcord_2_y2);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2_x2,this.buffer[ii].texcord_2_y1);
 								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x2,this.buffer[ii].vertex_y2,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_3_x2,this.buffer[ii].texcord_3_y1);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_3_x2,this.buffer[ii].texcord_3_y2);
 								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x3,this.buffer[ii].vertex_y3,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_4_x1,this.buffer[ii].texcord_4_y1);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_4_x1,this.buffer[ii].texcord_4_y2);
 								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x4,this.buffer[ii].vertex_y4,0.0f);	
 							}
 						}

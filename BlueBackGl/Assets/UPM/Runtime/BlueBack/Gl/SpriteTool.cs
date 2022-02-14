@@ -71,30 +71,51 @@ namespace BlueBack.Gl
 			a_spriteindex.spritelist.buffer[a_spriteindex.index].color = a_color;
 		}
 
-		/** SetTexcord
+		/** SetTexcordXY12
 		*/
-		public static void SetTexcord(ref SpriteBuffer a_spritebuffer,float a_texcord_x1,float a_texcord_y1,float a_texcord_x2,float a_texcord_y2)
+		public static void SetTexcordXY12(ref SpriteBuffer a_spritebuffer,float a_x1,float a_y1,float a_x2,float a_y2)
 		{
-			a_spritebuffer.texcord_1_x1 = a_texcord_x1;
-			a_spritebuffer.texcord_4_x1 = a_texcord_x1;
-			a_spritebuffer.texcord_3_y1 = a_texcord_y1;
-			a_spritebuffer.texcord_4_y1 = a_texcord_y1;
-			a_spritebuffer.texcord_2_x2 = a_texcord_x2;
-			a_spritebuffer.texcord_3_x2 = a_texcord_x2;
-			a_spritebuffer.texcord_1_y2 = a_texcord_y2;
-			a_spritebuffer.texcord_2_y2 = a_texcord_y2;
+			a_spritebuffer.texcord_1_x1 = a_x1;
+			a_spritebuffer.texcord_1_y1 = a_y1;
+			a_spritebuffer.texcord_2_x2 = a_x2;
+			a_spritebuffer.texcord_2_y1 = a_y1;
+			a_spritebuffer.texcord_3_x2 = a_x2;
+			a_spritebuffer.texcord_3_y2 = a_y2;
+			a_spritebuffer.texcord_4_x1 = a_x1;
+			a_spritebuffer.texcord_4_y2 = a_y2;
 		}
 
-		/** SetTexcord
+		/** SetTexcordXY12
 		*/
-		public static void SetTexcord(SpriteIndex a_spriteindex,float a_texcord_x1,float a_texcord_y1,float a_texcord_x2,float a_texcord_y2)
+		public static void SetTexcordXY12(SpriteIndex a_spriteindex,float a_x1,float a_y1,float a_x2,float a_y2)
 		{
-			SetTexcord(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_texcord_x1,a_texcord_y1,a_texcord_x2,a_texcord_y2);
+			SetTexcordXY12(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2);
 		}
 
-		/** SetXYWH
+		/** SetTexcordXY1234
 		*/
-		public static void SetXYWH(ref SpriteBuffer a_spritebuffer,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
+		public static void SetTexcordXY1234(ref SpriteBuffer a_spritebuffer,float a_x1,float a_y1,float a_x2,float a_y2,float a_x3,float a_y3,float a_x4,float a_y4)
+		{
+			a_spritebuffer.texcord_1_x1 = a_x1;
+			a_spritebuffer.texcord_1_y1 = a_y1;
+			a_spritebuffer.texcord_2_x2 = a_x2;
+			a_spritebuffer.texcord_2_y1 = a_y2;
+			a_spritebuffer.texcord_3_x2 = a_x3;
+			a_spritebuffer.texcord_3_y2 = a_y3;
+			a_spritebuffer.texcord_4_x1 = a_x4;
+			a_spritebuffer.texcord_4_y2 = a_y4;
+		}
+
+		/** SetTexcordXY1234
+		*/
+		public static void SetTexcordXY1234(SpriteIndex a_spriteindex,float a_x1,float a_y1,float a_x2,float a_y2,float a_x3,float a_y3,float a_x4,float a_y4)
+		{
+			SetTexcordXY1234(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2,a_x3,a_y3,a_x4,a_y4);
+		}
+
+		/** SetVertexXYWH
+		*/
+		public static void SetVertexXYWH(ref SpriteBuffer a_spritebuffer,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
 		{
 			float t_x1 = ((float)a_x * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
 			float t_y1 = (1.0f - ((float)a_y * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
@@ -110,16 +131,16 @@ namespace BlueBack.Gl
 			a_spritebuffer.vertex_y4 = t_y2 - a_screenparam.offset_y;
 		}
 
-		/** SetXYWH
+		/** SetVertexXYWH
 		*/
-		public static void SetXYWH(SpriteIndex a_spriteindex,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
+		public static void SetVertexXYWH(SpriteIndex a_spriteindex,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
 		{
-			SetXYWH(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x,a_y,a_w,a_h,in a_screenparam);
+			SetVertexXYWH(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x,a_y,a_w,a_h,in a_screenparam);
 		}
 
-		/** SetXY1XY2
+		/** SetVertexXY12
 		*/
-		public static void SetXY1XY2(ref SpriteBuffer a_spritebuffer,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
+		public static void SetVertexXY12(ref SpriteBuffer a_spritebuffer,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
 		{
 			float t_x1 = ((float)a_x1 * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
 			float t_y1 = (1.0f - ((float)a_y1 * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
@@ -135,11 +156,11 @@ namespace BlueBack.Gl
 			a_spritebuffer.vertex_y4 = t_y2 - a_screenparam.offset_y;
 		}
 
-		/** SetXY1XY2
+		/** SetVertexXY12
 		*/
-		public static void SetXY1XY2(SpriteIndex a_spriteindex,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
+		public static void SetVertexXY12(SpriteIndex a_spriteindex,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
 		{
-			SetXY1XY2(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2,in a_screenparam);
+			SetVertexXY12(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2,in a_screenparam);
 		}
 	}
 }

@@ -74,13 +74,13 @@ namespace BlueBack.Gl
 		/** texcord
 		*/
 		public float texcord_1_x1;
-		public float texcord_1_y2;
+		public float texcord_1_y1;
 		public float texcord_2_x2;
-		public float texcord_2_y2;
+		public float texcord_2_y1;
 		public float texcord_3_x2;
-		public float texcord_3_y1;
+		public float texcord_3_y2;
 		public float texcord_4_x1;
-		public float texcord_4_y1;
+		public float texcord_4_y2;
 
 		/** vertex
 		*/
@@ -147,13 +147,13 @@ namespace BlueBack.Gl
 			this.texture_index = a_spritebuffer.texture_index;
 			this.color = a_spritebuffer.color;
 			this.texcord_1_x1 = a_spritebuffer.texcord_1_x1;
-			this.texcord_1_y2 = a_spritebuffer.texcord_1_y2;
+			this.texcord_1_y1 = a_spritebuffer.texcord_1_y1;
 			this.texcord_2_x2 = a_spritebuffer.texcord_2_x2;
-			this.texcord_2_y2 = a_spritebuffer.texcord_2_y2;
+			this.texcord_2_y1 = a_spritebuffer.texcord_2_y1;
 			this.texcord_3_x2 = a_spritebuffer.texcord_3_x2;
-			this.texcord_3_y1 = a_spritebuffer.texcord_3_y1;
+			this.texcord_3_y2 = a_spritebuffer.texcord_3_y2;
 			this.texcord_4_x1 = a_spritebuffer.texcord_4_x1;
-			this.texcord_4_y1 = a_spritebuffer.texcord_4_y1;
+			this.texcord_4_y2 = a_spritebuffer.texcord_4_y2;
 			this.vertex_x1 = (a_spritebuffer.vertex_x1 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
 			this.vertex_x2 = (a_spritebuffer.vertex_x2 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
 			this.vertex_x3 = (a_spritebuffer.vertex_x3 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
@@ -173,13 +173,13 @@ namespace BlueBack.Gl
 			a_spritebuffer.texture_index = this.texture_index;
 			a_spritebuffer.color = this.color;
 			a_spritebuffer.texcord_1_x1 = this.texcord_1_x1;
-			a_spritebuffer.texcord_1_y2 = this.texcord_1_y2;
+			a_spritebuffer.texcord_1_y1 = this.texcord_1_y1;
 			a_spritebuffer.texcord_2_x2 = this.texcord_2_x2;
-			a_spritebuffer.texcord_2_y2 = this.texcord_2_y2;
+			a_spritebuffer.texcord_2_y1 = this.texcord_2_y1;
 			a_spritebuffer.texcord_3_x2 = this.texcord_3_x2;
-			a_spritebuffer.texcord_3_y1 = this.texcord_3_y1;
+			a_spritebuffer.texcord_3_y2 = this.texcord_3_y2;
 			a_spritebuffer.texcord_4_x1 = this.texcord_4_x1;
-			a_spritebuffer.texcord_4_y1 = this.texcord_4_y1;
+			a_spritebuffer.texcord_4_y2 = this.texcord_4_y2;
 			a_spritebuffer.vertex_x1 = s_screenparam.offset_x + (this.vertex_x1 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
 			a_spritebuffer.vertex_x2 = s_screenparam.offset_x + (this.vertex_x2 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
 			a_spritebuffer.vertex_x3 = s_screenparam.offset_x + (this.vertex_x3 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
