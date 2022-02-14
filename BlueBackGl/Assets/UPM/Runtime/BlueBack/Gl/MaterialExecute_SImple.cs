@@ -30,7 +30,7 @@ namespace BlueBack.Gl
 
 		/** texturelist
 		*/
-		private UnityEngine.Texture2D[] texturelist;
+		private UnityEngine.Texture[] texturelist;
 
 		/** constructor
 		*/

@@ -17,13 +17,13 @@ namespace BlueBack.Gl
 	{
 		/** list
 		*/
-		public UnityEngine.Texture2D[] list;
+		public UnityEngine.Texture[] list;
 
 		/** constructor
 		*/
 		public TextureList(in InitParam a_initparam)
 		{
-			this.list = new UnityEngine.Texture2D[a_initparam.texture_max];
+			this.list = new UnityEngine.Texture[a_initparam.texture_max];
 		}
 
 		/** [IDisposable]Dispose。

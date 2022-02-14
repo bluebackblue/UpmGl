@@ -7,6 +7,7 @@ MIT License
 
 ## 依存 / 使用ライセンス等
 ### ランタイム
+* https://github.com/bluebackblue/UpmUnityPoolList
 ### エディター
 * https://github.com/bluebackblue/UpmGl
 ### サンプル
@@ -17,7 +18,7 @@ Unity 2022.1.0b2
 
 ## UPM
 ### 最新
-* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.12
+* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.13
 ### 開発
 * https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM
 

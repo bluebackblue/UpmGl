@@ -75,10 +75,14 @@ namespace BlueBack.Gl
 		*/
 		public static void SetTexcord(ref SpriteBuffer a_spritebuffer,float a_texcord_x1,float a_texcord_y1,float a_texcord_x2,float a_texcord_y2)
 		{
-			a_spritebuffer.texcord_x1 = a_texcord_x1;
-			a_spritebuffer.texcord_y1 = a_texcord_y1;
-			a_spritebuffer.texcord_x2 = a_texcord_x2;
-			a_spritebuffer.texcord_y2 = a_texcord_y2;
+			a_spritebuffer.texcord_1_x1 = a_texcord_x1;
+			a_spritebuffer.texcord_4_x1 = a_texcord_x1;
+			a_spritebuffer.texcord_3_y1 = a_texcord_y1;
+			a_spritebuffer.texcord_4_y1 = a_texcord_y1;
+			a_spritebuffer.texcord_2_x2 = a_texcord_x2;
+			a_spritebuffer.texcord_3_x2 = a_texcord_x2;
+			a_spritebuffer.texcord_1_y2 = a_texcord_y2;
+			a_spritebuffer.texcord_2_y2 = a_texcord_y2;
 		}
 
 		/** SetTexcord

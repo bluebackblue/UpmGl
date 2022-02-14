@@ -33,11 +33,15 @@ namespace BlueBack.Gl
 
 		/** texcord
 		*/
-		public float texcord_x1;
-		public float texcord_y1;
-		public float texcord_x2;
-		public float texcord_y2;
-			
+		public float texcord_1_x1;
+		public float texcord_1_y2;
+		public float texcord_2_x2;
+		public float texcord_2_y2;
+		public float texcord_3_x2;
+		public float texcord_3_y1;
+		public float texcord_4_x1;
+		public float texcord_4_y1;
+
 		/** vertex
 		*/
 		public float vertex_x1;
