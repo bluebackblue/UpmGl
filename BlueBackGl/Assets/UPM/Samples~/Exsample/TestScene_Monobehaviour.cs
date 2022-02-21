@@ -36,10 +36,6 @@ namespace Samples.Gl.Exsample
 		*/
 		private System.Collections.Generic.List<Item> list;
 
-		/** screenparam
-		*/
-		public BlueBack.Gl.ScreenParam screenparam;
-
 		/** rendertexture
 		*/
 		public int rendertexture_w;
@@ -61,9 +57,6 @@ namespace Samples.Gl.Exsample
 			this.rendertexture_w = UnityEngine.Screen.width;
 			this.rendertexture_h = UnityEngine.Screen.height;
 
-			//screenparam
-			this.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(VIRTUAL_SCREEN_W,VIRTUAL_SCREEN_H,this.rendertexture_w,this.rendertexture_h);
-
 			//gl
 			{
 				BlueBack.Gl.InitParam t_initparam = BlueBack.Gl.InitParam.CreateDefault();
@@ -72,13 +65,9 @@ namespace Samples.Gl.Exsample
 					t_initparam.texture_max = 2;
 					t_initparam.material_max = 2;
 					t_initparam.sprite_max = 100;
+					t_initparam.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(VIRTUAL_SCREEN_W,VIRTUAL_SCREEN_H,this.rendertexture_w,this.rendertexture_h);
 				}
 				this.gl = new BlueBack.Gl.Gl(in t_initparam);
-
-				//SetScreenParam
-				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				BlueBack.Gl.Sprite_DebugView_MonoBehaviour.SetScreenParam(in this.screenparam);
-				#endif
 
 				//texturelist
 				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("Exsample/red");
@@ -125,7 +114,7 @@ namespace Samples.Gl.Exsample
 								t_spritebuffer.texture_index = (xx + yy < 8) ? 0 : 1;
 								t_spritebuffer.color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f);
 
-								BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.screenparam);
+								BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.gl.screenparam);
 
 								BlueBack.Gl.SpriteTool.SetTexcord(ref t_spritebuffer,in this.texcord);
 							}
@@ -150,18 +139,13 @@ namespace Samples.Gl.Exsample
 				this.rendertexture_h = UnityEngine.Screen.height;
 
 				//screenparam
-				this.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(VIRTUAL_SCREEN_W,VIRTUAL_SCREEN_H,this.rendertexture_w,this.rendertexture_h);
-
-				//SetScreenParam
-				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-				BlueBack.Gl.Sprite_DebugView_MonoBehaviour.SetScreenParam(in this.screenparam);
-				#endif
+				this.gl.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(VIRTUAL_SCREEN_W,VIRTUAL_SCREEN_H,this.rendertexture_w,this.rendertexture_h);
 
 				int ii_max = this.list.Count;
 				for(int ii=0;ii<ii_max;ii++){
 					Item t_item = this.list[ii];
 					ref BlueBack.Gl.SpriteBuffer t_spritebuffer = ref t_item.spriteindex.GetSpriteBuffer();
-					BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.screenparam);
+					BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.gl.screenparam);
 				}
 			}
 		}
