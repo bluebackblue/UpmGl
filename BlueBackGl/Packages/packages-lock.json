@@ -11,7 +11,9 @@
       "version": "https://github.com/bluebackblue/UpmCode.git?path=BlueBackCode/Assets/UPM",
       "depth": 0,
       "source": "git",
-      "dependencies": {},
+      "dependencies": {
+        "com.unity.mathematics": "1.2.5"
+      },
       "hash": "9142a25e1deb04e7219d26ec1414f6876a178f9f"
     },
     "blueback.jsonitem": {
@@ -56,6 +58,13 @@
       "dependencies": {
         "com.unity.test-framework": "1.1.9"
       },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.mathematics": {
+      "version": "1.2.5",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
       "url": "https://packages.unity.com"
     },
     "com.unity.test-framework": {

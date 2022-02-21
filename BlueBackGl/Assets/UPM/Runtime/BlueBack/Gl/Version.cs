@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief バージョン。自動生成。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief バージョン。自動生成。
 */
 
 
@@ -21,7 +21,7 @@ namespace BlueBack.Gl
 
 		/** packageversion
 		*/
-		public const string packageversion = "0.0.14";
+		public const string packageversion = "0.0.15";
 
 		/** GetPackageVersion
 		*/

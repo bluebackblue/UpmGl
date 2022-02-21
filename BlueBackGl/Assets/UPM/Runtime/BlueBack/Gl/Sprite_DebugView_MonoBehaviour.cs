@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -16,10 +16,6 @@ namespace BlueBack.Gl
 	#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 	public class Sprite_DebugView_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
-		/** spriteindex
-		*/
-		public SpriteIndex spriteindex;
-
 		/** Mode
 		*/
 		public enum Mode
@@ -37,6 +33,10 @@ namespace BlueBack.Gl
 			None,
 		}
 
+		/** spriteindex
+		*/
+		public SpriteIndex spriteindex;
+
 		/** mode
 		*/
 		public Mode mode;
@@ -44,20 +44,6 @@ namespace BlueBack.Gl
 		/** visible
 		*/
 		public bool visible;
-
-		/** screenparam
-		*/
-		public static ScreenParam s_screenparam;
-
-		/** screen
-		*/
-		public int screen_virtual_w_pix;
-		public int screen_virtual_h_pix;
-		public float screen_x;
-		public float screen_y;
-		public float screen_scale_w;
-		public float screen_scale_h;
-
 
 		/** material_index
 		*/
@@ -73,25 +59,36 @@ namespace BlueBack.Gl
 
 		/** texcord
 		*/
-		public float texcord_1_x1;
-		public float texcord_1_y1;
-		public float texcord_2_x2;
-		public float texcord_2_y1;
-		public float texcord_3_x2;
-		public float texcord_3_y2;
-		public float texcord_4_x1;
-		public float texcord_4_y2;
+		public float texcord_x0;
+		public float texcord_y0;
+		public float texcord_x1;
+		public float texcord_y1;
+		public float texcord_x2;
+		public float texcord_y2;
+		public float texcord_x3;
+		public float texcord_y3;
 
 		/** vertex
 		*/
+		public float vertex_x0;
+		public float vertex_y0;
 		public float vertex_x1;
 		public float vertex_y1;
 		public float vertex_x2;
 		public float vertex_y2;
 		public float vertex_x3;
 		public float vertex_y3;
-		public float vertex_x4;
-		public float vertex_y4;
+
+		/** virtual
+		*/
+		public float virtual_x0;
+		public float virtual_y0;
+		public float virtual_x1;
+		public float virtual_y1;
+		public float virtual_x2;
+		public float virtual_y2;
+		public float virtual_x3;
+		public float virtual_y3;
 
 		/** Awake
 		*/
@@ -124,44 +121,40 @@ namespace BlueBack.Gl
 			#endif
 		}
 
-		/** SetScreenParam
-		*/
-		public static void SetScreenParam(in ScreenParam a_screenparam)
-		{
-			s_screenparam = a_screenparam;
-		}
-
 		/** Read
 		*/
 		private void Read(ref SpriteBuffer a_spritebuffer)
 		{
-			this.screen_virtual_w_pix = (int)(1.0f / s_screenparam.virtual_w_pix_inv);
-			this.screen_virtual_h_pix = (int)(1.0f / s_screenparam.virtual_h_pix_inv);
-			this.screen_x = s_screenparam.offset_x;
-			this.screen_y = s_screenparam.offset_y;
-			this.screen_scale_w = s_screenparam.scale_w;
-			this.screen_scale_h = s_screenparam.scale_h;
-
 			this.visible = a_spritebuffer.visible;
 			this.material_index = a_spritebuffer.material_index;
 			this.texture_index = a_spritebuffer.texture_index;
 			this.color = a_spritebuffer.color;
-			this.texcord_1_x1 = a_spritebuffer.texcord_1_x1;
-			this.texcord_1_y1 = a_spritebuffer.texcord_1_y1;
-			this.texcord_2_x2 = a_spritebuffer.texcord_2_x2;
-			this.texcord_2_y1 = a_spritebuffer.texcord_2_y1;
-			this.texcord_3_x2 = a_spritebuffer.texcord_3_x2;
-			this.texcord_3_y2 = a_spritebuffer.texcord_3_y2;
-			this.texcord_4_x1 = a_spritebuffer.texcord_4_x1;
-			this.texcord_4_y2 = a_spritebuffer.texcord_4_y2;
-			this.vertex_x1 = (a_spritebuffer.vertex_x1 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
-			this.vertex_x2 = (a_spritebuffer.vertex_x2 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
-			this.vertex_x3 = (a_spritebuffer.vertex_x3 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
-			this.vertex_x4 = (a_spritebuffer.vertex_x4 - s_screenparam.offset_x) / s_screenparam.scale_w / s_screenparam.virtual_w_pix_inv;
-			this.vertex_y1 = (1.0f - (a_spritebuffer.vertex_y1 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
-			this.vertex_y2 = (1.0f - (a_spritebuffer.vertex_y2 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
-			this.vertex_y3 = (1.0f - (a_spritebuffer.vertex_y3 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
-			this.vertex_y4 = (1.0f - (a_spritebuffer.vertex_y4 - s_screenparam.offset_y) / s_screenparam.scale_h) / s_screenparam.virtual_h_pix_inv;
+			this.texcord_x0 = a_spritebuffer.texcord.c0.x;
+			this.texcord_y0 = a_spritebuffer.texcord.c0.y;
+			this.texcord_x1 = a_spritebuffer.texcord.c1.x;
+			this.texcord_y1 = a_spritebuffer.texcord.c1.y;
+			this.texcord_x2 = a_spritebuffer.texcord.c2.x;
+			this.texcord_y2 = a_spritebuffer.texcord.c2.y;
+			this.texcord_x3 = a_spritebuffer.texcord.c3.x;
+			this.texcord_y3 = a_spritebuffer.texcord.c3.y;
+			this.vertex_x0 = a_spritebuffer.vertex.c0.x;
+			this.vertex_y0 = a_spritebuffer.vertex.c0.y;
+			this.vertex_x1 = a_spritebuffer.vertex.c1.x;
+			this.vertex_y1 = a_spritebuffer.vertex.c1.y;
+			this.vertex_x2 = a_spritebuffer.vertex.c2.x;
+			this.vertex_y2 = a_spritebuffer.vertex.c2.y;
+			this.vertex_x3 = a_spritebuffer.vertex.c3.x;
+			this.vertex_y3 = a_spritebuffer.vertex.c3.y;
+
+			ref ScreenParam t_screenparam = ref this.spriteindex.spritelist.gl.screenparam;
+			this.virtual_x0 = (a_spritebuffer.vertex.c0.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y0 = (a_spritebuffer.vertex.c0.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x1 = (a_spritebuffer.vertex.c1.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y1 = (a_spritebuffer.vertex.c1.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x2 = (a_spritebuffer.vertex.c2.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y2 = (a_spritebuffer.vertex.c2.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x3 = (a_spritebuffer.vertex.c3.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y3 = (a_spritebuffer.vertex.c3.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
 		}
 
 		/** Write
@@ -172,25 +165,36 @@ namespace BlueBack.Gl
 			a_spritebuffer.material_index = this.material_index;
 			a_spritebuffer.texture_index = this.texture_index;
 			a_spritebuffer.color = this.color;
-			a_spritebuffer.texcord_1_x1 = this.texcord_1_x1;
-			a_spritebuffer.texcord_1_y1 = this.texcord_1_y1;
-			a_spritebuffer.texcord_2_x2 = this.texcord_2_x2;
-			a_spritebuffer.texcord_2_y1 = this.texcord_2_y1;
-			a_spritebuffer.texcord_3_x2 = this.texcord_3_x2;
-			a_spritebuffer.texcord_3_y2 = this.texcord_3_y2;
-			a_spritebuffer.texcord_4_x1 = this.texcord_4_x1;
-			a_spritebuffer.texcord_4_y2 = this.texcord_4_y2;
-			a_spritebuffer.vertex_x1 = s_screenparam.offset_x + (this.vertex_x1 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
-			a_spritebuffer.vertex_x2 = s_screenparam.offset_x + (this.vertex_x2 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
-			a_spritebuffer.vertex_x3 = s_screenparam.offset_x + (this.vertex_x3 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
-			a_spritebuffer.vertex_x4 = s_screenparam.offset_x + (this.vertex_x4 * s_screenparam.virtual_w_pix_inv) * s_screenparam.scale_w;
-			a_spritebuffer.vertex_y1 = s_screenparam.offset_y + (1.0f - this.vertex_y1 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
-			a_spritebuffer.vertex_y2 = s_screenparam.offset_y + (1.0f - this.vertex_y2 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
-			a_spritebuffer.vertex_y3 = s_screenparam.offset_y + (1.0f - this.vertex_y3 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
-			a_spritebuffer.vertex_y4 = s_screenparam.offset_y + (1.0f - this.vertex_y4 * s_screenparam.virtual_h_pix_inv) * s_screenparam.scale_h;
+			a_spritebuffer.texcord.c0.x = this.texcord_x0;
+			a_spritebuffer.texcord.c0.y = this.texcord_y0;
+			a_spritebuffer.texcord.c1.x = this.texcord_x1;
+			a_spritebuffer.texcord.c1.y = this.texcord_y1;
+			a_spritebuffer.texcord.c2.x = this.texcord_x2;
+			a_spritebuffer.texcord.c2.y = this.texcord_y2;
+			a_spritebuffer.texcord.c3.x = this.texcord_x3;
+			a_spritebuffer.texcord.c3.y = this.texcord_y3;
+			a_spritebuffer.vertex.c0.x = this.vertex_x0;
+			a_spritebuffer.vertex.c0.y = this.vertex_y0;
+			a_spritebuffer.vertex.c1.x = this.vertex_x1;
+			a_spritebuffer.vertex.c1.y = this.vertex_y1;
+			a_spritebuffer.vertex.c2.x = this.vertex_x2;
+			a_spritebuffer.vertex.c2.y = this.vertex_y2;
+			a_spritebuffer.vertex.c3.x = this.vertex_x3;
+			a_spritebuffer.vertex.c3.y = this.vertex_y3;
+
+			ref ScreenParam t_screenparam = ref this.spriteindex.spritelist.gl.screenparam;
+			this.virtual_x0 = (a_spritebuffer.vertex.c0.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y0 = (a_spritebuffer.vertex.c0.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x1 = (a_spritebuffer.vertex.c1.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y1 = (a_spritebuffer.vertex.c1.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x2 = (a_spritebuffer.vertex.c2.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y2 = (a_spritebuffer.vertex.c2.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
+			this.virtual_x3 = (a_spritebuffer.vertex.c3.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
+			this.virtual_y3 = (a_spritebuffer.vertex.c3.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
 		}
 	}
 	#endif
 }
 
- 
+
+

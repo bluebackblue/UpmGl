@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -11,37 +11,27 @@
 */
 namespace BlueBack.Gl
 {
-    /** ScreenParam
-    */
+				/** ScreenParam
+				*/
 	#if(UNITY_EDITOR)
 	[System.Serializable]
 	#endif
-    public struct ScreenParam
-    {
-		/** 仮想画面サイズ。
-
-			virtual_w_pix_inv : 1.0f / VIRTUAL_W
-			virtual_h_pix_inv : 1.0f / VIRTUAL_H
-
+				public struct ScreenParam
+				{
+		/** 仮想サイズ。
 		*/
-		public float virtual_w_pix_inv;
-		public float virtual_h_pix_inv;
+		public float virtual_w;
+		public float virtual_h;
 
-		/** スクリーンオフセット。
-
-			単位：レンダーテクスチャーの幅/高を1.0f
-
+		/** レンダーテクスチャーサイズ。
 		*/
-		public float offset_x;
-		public float offset_y;
+		public float rendertexture_w;
+		public float rendertexture_h;
 
-		/** スクリーンスケール。
-
-			単位：レンダーテクスチャーの幅/高を1.0f
-
+		/** 計算用。
 		*/
-		public float scale_w;
-		public float scale_h;
-    }
+		public Unity.Mathematics.float2 calc_wh;
+		public Unity.Mathematics.float2 calc_xy;
+				}
 }
 

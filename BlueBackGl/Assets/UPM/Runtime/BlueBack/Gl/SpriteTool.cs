@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -22,25 +22,11 @@ namespace BlueBack.Gl
 			a_spritebuffer.visible = a_flag;
 		}
 
-		/** SetVisible
-		*/
-		public static void SetVisible(SpriteIndex a_spriteindex,bool a_flag)
-		{
-			a_spriteindex.spritelist.buffer[a_spriteindex.index].visible = a_flag;
-		}
-
 		/** SetMaterialIndex
 		*/
 		public static void SetMaterialIndex(ref SpriteBuffer a_spritebuffer,int a_material_index)
 		{
 			a_spritebuffer.material_index = a_material_index;
-		}
-
-		/** SetMaterialIndex
-		*/
-		public static void SetMaterialIndex(SpriteIndex a_spriteindex,int a_material_index)
-		{
-			a_spriteindex.spritelist.buffer[a_spriteindex.index].material_index = a_material_index;
 		}
 
 		/** SetTextureIndex
@@ -50,13 +36,6 @@ namespace BlueBack.Gl
 			a_spritebuffer.texture_index = a_texture_index;
 		}
 
-		/** SetTextureIndex
-		*/
-		public static void SetTextureIndex(SpriteIndex a_spriteindex,int a_texture_index)
-		{
-			a_spriteindex.spritelist.buffer[a_spriteindex.index].texture_index = a_texture_index;
-		}
-
 		/** SetColor
 		*/
 		public static void SetColor(ref SpriteBuffer a_spritebuffer,in UnityEngine.Color a_color)
@@ -64,103 +43,118 @@ namespace BlueBack.Gl
 			a_spritebuffer.color = a_color;
 		}
 
-		/** SetColor
+		/** SetTexcord
 		*/
-		public static void SetColor(SpriteIndex a_spriteindex,in UnityEngine.Color a_color)
+		public static void SetTexcord(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_texcord)
 		{
-			a_spriteindex.spritelist.buffer[a_spriteindex.index].color = a_color;
+			a_spritebuffer.texcord = Unity.Mathematics.math.float2x4(
+				a_texcord.c0,
+				Unity.Mathematics.math.float2(a_texcord.c1.x,a_texcord.c0.y),
+				a_texcord.c1,
+				Unity.Mathematics.math.float2(a_texcord.c0.x,a_texcord.c1.y)
+			);
 		}
 
-		/** SetTexcordXY12
+		/** SetVertex。２頂点。
 		*/
-		public static void SetTexcordXY12(ref SpriteBuffer a_spritebuffer,float a_x1,float a_y1,float a_x2,float a_y2)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in ScreenParam a_screenparam)
 		{
-			a_spritebuffer.texcord_1_x1 = a_x1;
-			a_spritebuffer.texcord_1_y1 = a_y1;
-			a_spritebuffer.texcord_2_x2 = a_x2;
-			a_spritebuffer.texcord_2_y1 = a_y1;
-			a_spritebuffer.texcord_3_x2 = a_x2;
-			a_spritebuffer.texcord_3_y2 = a_y2;
-			a_spritebuffer.texcord_4_x1 = a_x1;
-			a_spritebuffer.texcord_4_y2 = a_y2;
+			Unity.Mathematics.float2 t_c0 = a_vertex.c0 * a_screenparam.calc_wh + a_screenparam.calc_xy;
+			Unity.Mathematics.float2 t_c1 = a_vertex.c1 * a_screenparam.calc_wh + a_screenparam.calc_xy;
+
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				t_c0,
+				Unity.Mathematics.math.float2(t_c1.x,t_c0.y),
+				t_c1,
+				Unity.Mathematics.math.float2(t_c0.x,t_c1.y)
+			);
 		}
 
-		/** SetTexcordXY12
+		/** SetVertex。２頂点。
+
+			a_offset		: オフセット。
+
 		*/
-		public static void SetTexcordXY12(SpriteIndex a_spriteindex,float a_x1,float a_y1,float a_x2,float a_y2)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in Unity.Mathematics.float2 a_offset,in ScreenParam a_screenparam)
 		{
-			SetTexcordXY12(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2);
+			Unity.Mathematics.float2 t_c0 = (a_vertex.c0 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy;
+			Unity.Mathematics.float2 t_c1 = (a_vertex.c1 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy;
+
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				t_c0,
+				Unity.Mathematics.math.float2(t_c1.x,t_c0.y),
+				t_c1,
+				Unity.Mathematics.math.float2(t_c0.x,t_c1.y)
+			);
 		}
 
-		/** SetTexcordXY1234
+		/** SetVertex。２頂点。
+
+			a_offset		: オフセット。
+			a_quaternion	: 回転。
+
 		*/
-		public static void SetTexcordXY1234(ref SpriteBuffer a_spritebuffer,float a_x1,float a_y1,float a_x2,float a_y2,float a_x3,float a_y3,float a_x4,float a_y4)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in Unity.Mathematics.float2 a_offset,in UnityEngine.Quaternion a_quaternion,in ScreenParam a_screenparam)
 		{
-			a_spritebuffer.texcord_1_x1 = a_x1;
-			a_spritebuffer.texcord_1_y1 = a_y1;
-			a_spritebuffer.texcord_2_x2 = a_x2;
-			a_spritebuffer.texcord_2_y1 = a_y2;
-			a_spritebuffer.texcord_3_x2 = a_x3;
-			a_spritebuffer.texcord_3_y2 = a_y3;
-			a_spritebuffer.texcord_4_x1 = a_x4;
-			a_spritebuffer.texcord_4_y2 = a_y4;
+			Unity.Mathematics.float2 t_c0 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c0,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c1 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c1.x,a_vertex.c0.y,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c2 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c1,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c3 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c0.x,a_vertex.c1.y,0.0f)).xy + a_offset;
+
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				t_c0 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c1 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c2 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c3 * a_screenparam.calc_wh + a_screenparam.calc_xy
+			);
 		}
 
-		/** SetTexcordXY1234
+		/** SetVertex。４頂点。
 		*/
-		public static void SetTexcordXY1234(SpriteIndex a_spriteindex,float a_x1,float a_y1,float a_x2,float a_y2,float a_x3,float a_y3,float a_x4,float a_y4)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in ScreenParam a_screenparam)
 		{
-			SetTexcordXY1234(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2,a_x3,a_y3,a_x4,a_y4);
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				a_vertex.c0 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				a_vertex.c1 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				a_vertex.c2 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				a_vertex.c3 * a_screenparam.calc_wh + a_screenparam.calc_xy
+			);
 		}
 
-		/** SetVertexXYWH
+		/** SetVertex。４頂点。
+
+			a_offset		: オフセット。
+
 		*/
-		public static void SetVertexXYWH(ref SpriteBuffer a_spritebuffer,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in Unity.Mathematics.float2 a_offset,in ScreenParam a_screenparam)
 		{
-			float t_x1 = ((float)a_x * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-			float t_y1 = (1.0f - ((float)a_y * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-			float t_x2 = t_x1 + ((float)a_w * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-			float t_y2 = (t_y1 - ((float)a_h * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-			a_spritebuffer.vertex_x1 = t_x1 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y1 = t_y1 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x2 = t_x2 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y2 = t_y1 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x3 = t_x2 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y3 = t_y2 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x4 = t_x1 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y4 = t_y2 - a_screenparam.offset_y;
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				(a_vertex.c0 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				(a_vertex.c1 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				(a_vertex.c2 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				(a_vertex.c3 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy
+			);
 		}
 
-		/** SetVertexXYWH
-		*/
-		public static void SetVertexXYWH(SpriteIndex a_spriteindex,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
-		{
-			SetVertexXYWH(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x,a_y,a_w,a_h,in a_screenparam);
-		}
+		/** SetVertex。４頂点。
 
-		/** SetVertexXY12
-		*/
-		public static void SetVertexXY12(ref SpriteBuffer a_spritebuffer,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
-		{
-			float t_x1 = ((float)a_x1 * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-			float t_y1 = (1.0f - ((float)a_y1 * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-			float t_x2 = ((float)(a_x2 + 1) * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-			float t_y2 = (1.0f - ((float)(a_y2 + 1) * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-			a_spritebuffer.vertex_x1 = t_x1 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y1 = t_y1 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x2 = t_x2 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y2 = t_y1 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x3 = t_x2 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y3 = t_y2 - a_screenparam.offset_y;
-			a_spritebuffer.vertex_x4 = t_x1 + a_screenparam.offset_x;
-			a_spritebuffer.vertex_y4 = t_y2 - a_screenparam.offset_y;
-		}
+			a_offset		: オフセット。
+			a_quaternion	: 回転。
 
-		/** SetVertexXY12
 		*/
-		public static void SetVertexXY12(SpriteIndex a_spriteindex,int a_x1,int a_y1,int a_x2,int a_y2,in ScreenParam a_screenparam)
+		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in Unity.Mathematics.float2 a_offset,in UnityEngine.Quaternion a_quaternion,in ScreenParam a_screenparam)
 		{
-			SetVertexXY12(ref a_spriteindex.spritelist.buffer[a_spriteindex.index],a_x1,a_y1,a_x2,a_y2,in a_screenparam);
+			Unity.Mathematics.float2 t_c0 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c0,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c1 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c1,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c2 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c2,0.0f)).xy + a_offset;
+			Unity.Mathematics.float2 t_c3 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c3,0.0f)).xy + a_offset;
+
+			a_spritebuffer.vertex = Unity.Mathematics.math.float2x4(
+				t_c0 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c1 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c2 * a_screenparam.calc_wh + a_screenparam.calc_xy,
+				t_c3 * a_screenparam.calc_wh + a_screenparam.calc_xy
+			);
 		}
 	}
 }

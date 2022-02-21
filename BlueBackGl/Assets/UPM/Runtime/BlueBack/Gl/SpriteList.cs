@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -15,6 +15,10 @@ namespace BlueBack.Gl
 	*/
 	public sealed class SpriteList : System.IDisposable
 	{
+		/** gl
+		*/
+		public Gl gl;
+
 		/** buffer
 		*/
 		public SpriteBuffer[] buffer;
@@ -31,6 +35,9 @@ namespace BlueBack.Gl
 		*/
 		public SpriteList(in InitParam a_initparam,Gl a_gl)
 		{
+			//gl
+			this.gl = a_gl;
+
 			//buffer
 			this.buffer = new SpriteBuffer[a_initparam.sprite_max];
 
@@ -73,23 +80,9 @@ namespace BlueBack.Gl
 					visible = false,
 					material_index = -1,
 					texture_index = -1,
-					color = new UnityEngine.Color(1,1,1,1),
-					texcord_1_x1 = 0.0f,
-					texcord_1_y1 = 1.0f,
-					texcord_2_x2 = 1.0f,
-					texcord_2_y1 = 1.0f,
-					texcord_3_x2 = 1.0f,
-					texcord_3_y2 = 0.0f,
-					texcord_4_x1 = 0.0f,
-					texcord_4_y2 = 0.0f,
-					vertex_x1 = 0,
-					vertex_y1 = 0,
-					vertex_x2 = 0,
-					vertex_y2 = 0,
-					vertex_x3 = 0,
-					vertex_y3 = 0,
-					vertex_x4 = 0,
-					vertex_y4 = 0,
+					color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
+					texcord = Unity.Mathematics.float2x4.zero,
+					vertex = Unity.Mathematics.float2x4.zero,
 				};
 			}
 			return t_node.Value;
@@ -97,7 +90,7 @@ namespace BlueBack.Gl
 
 		/** CreateSprite
 		*/
-		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index,in UnityEngine.Color a_color,int a_x,int a_y,int a_w,int a_h,in ScreenParam a_screenparam)
+		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 			{
@@ -108,33 +101,14 @@ namespace BlueBack.Gl
 				t_node.Value.SetDebugViewActive(true);
 				#endif
 
-				float t_x1 = ((float)a_x * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-				float t_y1 = (1.0f - ((float)a_y * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-				float t_x2 = t_x1 + ((float)a_w * a_screenparam.scale_w) * a_screenparam.virtual_w_pix_inv;
-				float t_y2 = (t_y1 - ((float)a_h * a_screenparam.scale_h) * a_screenparam.virtual_h_pix_inv);
-
 				//buffer
 				this.buffer[t_node.Value.index] = new SpriteBuffer(){
 					visible = a_visible,
 					material_index = a_material_index,
 					texture_index = a_texture_index,
-					color = a_color,
-					texcord_1_x1 = 0.0f,
-					texcord_1_y1 = 1.0f,
-					texcord_2_x2 = 1.0f,
-					texcord_2_y1 = 1.0f,
-					texcord_3_x2 = 1.0f,
-					texcord_3_y2 = 0.0f,
-					texcord_4_x1 = 0.0f,
-					texcord_4_y2 = 0.0f,
-					vertex_x1 = t_x1 + a_screenparam.offset_x,
-					vertex_y1 = t_y1 - a_screenparam.offset_y,
-					vertex_x2 = t_x2 + a_screenparam.offset_x,
-					vertex_y2 = t_y1 - a_screenparam.offset_y,
-					vertex_x3 = t_x2 + a_screenparam.offset_x,
-					vertex_y3 = t_y2 - a_screenparam.offset_y,
-					vertex_x4 = t_x1 + a_screenparam.offset_x,
-					vertex_y4 = t_y2 - a_screenparam.offset_y,
+					color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
+					texcord = Unity.Mathematics.float2x4.zero,
+					vertex = Unity.Mathematics.float2x4.zero,
 				};
 			}
 			return t_node.Value;
@@ -194,17 +168,17 @@ namespace BlueBack.Gl
 							if(t_is_begin == true){
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_1_x1,this.buffer[ii].texcord_1_y1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x1,this.buffer[ii].vertex_y1,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c0.x,this.buffer[ii].texcord.c0.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c0.x,this.buffer[ii].vertex.c0.y,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_2_x2,this.buffer[ii].texcord_2_y1);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x2,this.buffer[ii].vertex_y2,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c1.x,this.buffer[ii].texcord.c1.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c1.x,this.buffer[ii].vertex.c1.y,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_3_x2,this.buffer[ii].texcord_3_y2);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x3,this.buffer[ii].vertex_y3,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c2.x,this.buffer[ii].texcord.c2.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c2.x,this.buffer[ii].vertex.c2.y,0.0f);
 
-								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord_4_x1,this.buffer[ii].texcord_4_y2);
-								UnityEngine.GL.Vertex3(this.buffer[ii].vertex_x4,this.buffer[ii].vertex_y4,0.0f);	
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c3.x,this.buffer[ii].texcord.c3.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c3.x,this.buffer[ii].vertex.c3.y,0.0f);	
 							}
 						}
 					}

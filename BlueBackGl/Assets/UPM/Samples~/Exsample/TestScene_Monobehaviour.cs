@@ -27,11 +27,9 @@ namespace Samples.Gl.Exsample
 		*/
 		private struct Item
 		{
-			public int x;
-			public int y;
-			public int w;
-			public int h;
 			public BlueBack.Gl.SpriteIndex spriteindex;
+			public Unity.Mathematics.float2 offset;
+
 		}
 
 		/** list
@@ -46,6 +44,14 @@ namespace Samples.Gl.Exsample
 		*/
 		public int rendertexture_w;
 		public int rendertexture_h;
+
+		/** texcord
+		*/
+		public Unity.Mathematics.float2x2 texcord;
+
+		/** vertex
+		*/
+		public Unity.Mathematics.float2x2 vertex;
 
 		/** Awake
 		*/
@@ -73,104 +79,63 @@ namespace Samples.Gl.Exsample
 				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 				BlueBack.Gl.Sprite_DebugView_MonoBehaviour.SetScreenParam(in this.screenparam);
 				#endif
-					
+
 				//texturelist
-				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("red");
-				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("green");
+				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("Exsample/red");
+				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("Exsample/green");
 
 				//materialexecutelist
-				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("opaque"));
-				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("transparent"));
+				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("Exsample/opaque"));
+				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("Exsample/transparent"));
 			}
 
 			{
 				this.list = new System.Collections.Generic.List<Item>();
+
+				//texcord
+				this.texcord = Unity.Mathematics.math.float2x2(
+					Unity.Mathematics.math.float2(0.0f,0.0f),
+					Unity.Mathematics.math.float2(1.0f,1.0f)
+				);
+
+				//vertex
+				this.vertex = Unity.Mathematics.math.float2x2(
+					Unity.Mathematics.math.float2(0.0f,0.0f),
+					Unity.Mathematics.math.float2(TIP_SIZE,TIP_SIZE)
+				);
 
 				//８ｘ８。
 				for(int xx=0;xx<8;xx++){
 					for(int yy=0;yy<8;yy++){
 						Item t_item = new Item();
 						{
-							t_item.x = TIP_OFFSET_X + xx * (TIP_SIZE + 1);
-							t_item.y = TIP_OFFSET_Y + yy * (TIP_SIZE + 1);
-							t_item.w = TIP_SIZE;
-							t_item.h = TIP_SIZE;
-							int t_texture_index = (xx + yy < 8) ? 0 : 1;
-							int t_material_index = 0;
-							t_item.spriteindex = this.gl.spritelist[0].CreateSprite(
-								true,
-								t_material_index,
-								t_texture_index,
-								new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
-								t_item.x,
-								t_item.y,
-								t_item.w,
-								t_item.h,
-								in this.screenparam
+							//spriteindex
+							t_item.spriteindex = this.gl.spritelist[0].CreateSprite();
+
+							//offset
+							t_item.offset = new Unity.Mathematics.float2(
+								TIP_OFFSET_X + xx * (TIP_SIZE + 1),
+								TIP_OFFSET_Y + yy * (TIP_SIZE + 1)
 							);
+
+							ref BlueBack.Gl.SpriteBuffer t_spritebuffer = ref t_item.spriteindex.GetSpriteBuffer();
+							{
+								t_spritebuffer.visible = true;
+								t_spritebuffer.material_index = 0;
+								t_spritebuffer.texture_index = (xx + yy < 8) ? 0 : 1;
+								t_spritebuffer.color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f);
+
+								BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.screenparam);
+
+								BlueBack.Gl.SpriteTool.SetTexcord(ref t_spritebuffer,in this.texcord);
+							}
+
 							#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 							t_item.spriteindex.SetDebugViewName(xx.ToString() + "_" + yy.ToString());
 							#endif
 						}
 						this.list.Add(t_item);
 					}
-				}
-
-				//左上。
-				{
-					Item t_item = new Item();
-					{
-						t_item.x = 0;
-						t_item.y = 0;
-						t_item.w = 64;
-						t_item.h = 64;
-						int t_texture_index = 0;
-						int t_material_index = 0;
-						t_item.spriteindex = this.gl.spritelist[0].CreateSprite(
-							true,
-							t_material_index,
-							t_texture_index,
-							new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
-							t_item.x,
-							t_item.y,
-							t_item.w,
-							t_item.h,
-							in this.screenparam
-						);
-						#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-						t_item.spriteindex.SetDebugViewName("lt");
-						#endif
-					}
-
-					this.list.Add(t_item);
-				}
-
-				//右下。
-				{
-					Item t_item = new Item();
-					{
-						t_item.x = VIRTUAL_SCREEN_W - 64;
-						t_item.y = VIRTUAL_SCREEN_H - 64;
-						t_item.w = 64;
-						t_item.h = 64;
-						int t_texture_index = 0;
-						int t_material_index = 0;
-						t_item.spriteindex = this.gl.spritelist[0].CreateSprite(
-							true,
-							t_material_index,
-							t_texture_index,
-							new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
-							t_item.x,
-							t_item.y,
-							t_item.w,
-							t_item.h,
-							in this.screenparam
-						);
-						#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-						t_item.spriteindex.SetDebugViewName("rd");
-						#endif
-					}
-					this.list.Add(t_item);
 				}
 			}
 		}
@@ -195,8 +160,8 @@ namespace Samples.Gl.Exsample
 				int ii_max = this.list.Count;
 				for(int ii=0;ii<ii_max;ii++){
 					Item t_item = this.list[ii];
-					BlueBack.Gl.SpriteTool.SetTexcordXY12(t_item.spriteindex,0.0f,0.0f,1.0f,1.0f);
-					BlueBack.Gl.SpriteTool.SetVertexXYWH(t_item.spriteindex,t_item.x,t_item.y,t_item.w,t_item.h,in this.screenparam);
+					ref BlueBack.Gl.SpriteBuffer t_spritebuffer = ref t_item.spriteindex.GetSpriteBuffer();
+					BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.screenparam);
 				}
 			}
 		}

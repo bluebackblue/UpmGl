@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -27,10 +27,17 @@ namespace BlueBack.Gl
 		*/
 		public SpriteList[] spritelist;
 
-		/** gl
+		/** gameobject
 		*/
-		private UnityEngine.GameObject gl_gameobject;
-		private UnityEngine.Camera gl_camera;
+		private UnityEngine.GameObject gameobject;
+
+		/** camera
+		*/
+		private UnityEngine.Camera camera;
+
+		/** screenparam
+		*/
+		public ScreenParam screenparam;
 
 		/** constructor
 		*/
@@ -48,22 +55,25 @@ namespace BlueBack.Gl
 				this.spritelist[ii] = new SpriteList(in a_initparam,this);
 			}
 
-			//gl_gameobject
-			this.gl_gameobject = new UnityEngine.GameObject("gl");
-			UnityEngine.GameObject.DontDestroyOnLoad(this.gl_gameobject);
+			//gameobject
+			this.gameobject = new UnityEngine.GameObject("gl");
+			UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
 
-			//gl_camera
-			this.gl_camera = this.gl_gameobject.AddComponent<UnityEngine.Camera>();
-			this.gl_camera.Reset();
-			this.gl_camera.depth = a_initparam.camera_depth;
-			this.gl_camera.orthographic = true;
-			this.gl_camera.clearFlags = a_initparam.camera_clearflag;
-			this.gl_camera.backgroundColor = a_initparam.camera_bgcolor;
-			this.gl_camera.cullingMask = a_initparam.camera_cullingmask;
-			this.gl_camera.useOcclusionCulling = false;
+			//camera
+			this.camera = this.gameobject.AddComponent<UnityEngine.Camera>();
+			this.camera.Reset();
+			this.camera.depth = a_initparam.camera_depth;
+			this.camera.orthographic = true;
+			this.camera.clearFlags = a_initparam.camera_clearflag;
+			this.camera.backgroundColor = a_initparam.camera_bgcolor;
+			this.camera.cullingMask = a_initparam.camera_cullingmask;
+			this.camera.useOcclusionCulling = false;
+
+			//screenparam
+			this.screenparam = a_initparam.screenparam;
 
 			//gl_monobehaviour
-			Gl_MonoBehaviour t_gl_monobehaviour = this.gl_gameobject.AddComponent<Gl_MonoBehaviour>();
+			Gl_MonoBehaviour t_gl_monobehaviour = this.gameobject.AddComponent<Gl_MonoBehaviour>();
 			t_gl_monobehaviour.spritelist = this.spritelist;
 		}
 
@@ -81,9 +91,9 @@ namespace BlueBack.Gl
 			}
 			this.spritelist = null;
 
-			if(this.gl_gameobject != null){
-				UnityEngine.GameObject.Destroy(this.gl_gameobject);
-				this.gl_gameobject = null;
+			if(this.gameobject != null){
+				UnityEngine.GameObject.Destroy(this.gameobject);
+				this.gameobject = null;
 			}
 		}
 	}

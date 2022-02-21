@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief 初期化パラメータ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief 初期化パラメータ。
 */
 
 
@@ -47,6 +47,10 @@ namespace BlueBack.Gl
 		*/
 		public UnityEngine.Color camera_bgcolor;
 
+		/** screenparam
+		*/
+		public ScreenParam screenparam;
+
 		/** CreateDefault
 		*/
 		public static InitParam CreateDefault()
@@ -60,6 +64,7 @@ namespace BlueBack.Gl
 				camera_cullingmask = 0,
 				camera_clearflag = UnityEngine.CameraClearFlags.SolidColor,
 				camera_bgcolor = new UnityEngine.Color(0.0f,0.0f,0.0f,1.0f),
+				screenparam = ScreenTool.CreateScreenParamWidthStretch(1280,720,UnityEngine.Screen.width,UnityEngine.Screen.height),
 			};
 		}
 	}

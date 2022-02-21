@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -15,6 +15,14 @@ namespace BlueBack.Gl
 	*/
 	public struct SpriteBuffer
 	{
+		/** texcord
+		*/
+		public Unity.Mathematics.float2x4 texcord;
+
+		/** vertex
+		*/
+		public Unity.Mathematics.float2x4 vertex;
+
 		/** visible
 		*/
 		public bool visible;
@@ -27,31 +35,13 @@ namespace BlueBack.Gl
 		*/
 		public int texture_index;
 
+		/** userdata
+		*/
+		public int userdata;
+
 		/** color
 		*/
 		public UnityEngine.Color color;
-
-		/** texcord
-		*/
-		public float texcord_1_x1;
-		public float texcord_1_y1;
-		public float texcord_2_x2;
-		public float texcord_2_y1;
-		public float texcord_3_x2;
-		public float texcord_3_y2;
-		public float texcord_4_x1;
-		public float texcord_4_y2;
-
-		/** vertex
-		*/
-		public float vertex_x1;
-		public float vertex_y1;
-		public float vertex_x2;
-		public float vertex_y2;
-		public float vertex_x3;
-		public float vertex_y3;
-		public float vertex_x4;
-		public float vertex_y4;
 	}
 }
 

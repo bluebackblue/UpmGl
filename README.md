@@ -8,17 +8,19 @@ MIT License
 ## 依存 / 使用ライセンス等
 ### ランタイム
 * https://github.com/bluebackblue/UpmUnityPoolList
+* https://docs.unity3d.com/Packages/com.unity.mathematics@latest/index.html
 ### エディター
 * https://github.com/bluebackblue/UpmGl
 ### サンプル
 * https://github.com/bluebackblue/UpmGl
+* https://docs.unity3d.com/Packages/com.unity.mathematics@latest/index.html
 
 ## 動作確認
 Unity 2022.1.0b2
 
 ## UPM
 ### 最新
-* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.14
+* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.15
 ### 開発
 * https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM
 

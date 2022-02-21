@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -26,7 +26,7 @@ namespace BlueBack.Gl
 			this.list = new UnityEngine.Texture[a_initparam.texture_max];
 		}
 
-		/** [IDisposable]Dispose。
+		/** [IDisposable]破棄。
 		*/
 		public void Dispose()
 		{

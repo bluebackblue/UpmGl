@@ -1,9 +1,9 @@
 
 
 /**
- * Copyright (c) blueback
- * Released under the MIT License
- * @brief ＧＬ。
+	Copyright (c) blueback
+	Released under the MIT License
+	@brief ＧＬ。
 */
 
 
@@ -46,6 +46,13 @@ namespace BlueBack.Gl
 		public void SetIndex(int a_index)
 		{
 			this.index = a_index;
+		}
+
+		/** GetSpriteBuffer
+		*/
+		public ref SpriteBuffer GetSpriteBuffer()
+		{
+			return ref this.spritelist.buffer[this.index];
 		}
 
 		/** constructor
