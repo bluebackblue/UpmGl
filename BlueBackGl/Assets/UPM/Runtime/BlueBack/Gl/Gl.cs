@@ -33,7 +33,7 @@ namespace BlueBack.Gl
 
 		/** camera
 		*/
-		private UnityEngine.Camera camera;
+		public UnityEngine.Camera camera;
 
 		/** screenparam
 		*/
@@ -64,6 +64,7 @@ namespace BlueBack.Gl
 			this.camera.Reset();
 			this.camera.depth = a_initparam.camera_depth;
 			this.camera.orthographic = true;
+			this.camera.orthographicSize = a_initparam.camera_orthographic_size;
 			this.camera.clearFlags = a_initparam.camera_clearflag;
 			this.camera.backgroundColor = a_initparam.camera_bgcolor;
 			this.camera.cullingMask = a_initparam.camera_cullingmask;
