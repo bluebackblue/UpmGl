@@ -69,6 +69,8 @@ namespace BlueBack.Gl
 			this.camera.backgroundColor = a_initparam.camera_bgcolor;
 			this.camera.cullingMask = a_initparam.camera_cullingmask;
 			this.camera.useOcclusionCulling = false;
+			this.camera.allowHDR = a_initparam.camera_hdr;
+			this.camera.allowMSAA = a_initparam.camera_msaa;
 
 			//screenparam
 			this.screenparam = a_initparam.screenparam;

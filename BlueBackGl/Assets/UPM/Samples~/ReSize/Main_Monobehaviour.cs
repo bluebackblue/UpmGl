@@ -81,15 +81,15 @@ namespace BlueBack.Gl.Samples.ReSize
 				this.list = new System.Collections.Generic.List<Item>();
 
 				//texcord
-				this.texcord = Unity.Mathematics.math.float2x2(
-					Unity.Mathematics.math.float2(0.0f,0.0f),
-					Unity.Mathematics.math.float2(1.0f,1.0f)
+				this.texcord = new Unity.Mathematics.float2x2(
+					new Unity.Mathematics.float2(0.0f,0.0f),
+					new Unity.Mathematics.float2(1.0f,1.0f)
 				);
 
 				//vertex
-				this.vertex = Unity.Mathematics.math.float2x2(
-					Unity.Mathematics.math.float2(0.0f,0.0f),
-					Unity.Mathematics.math.float2(TIP_SIZE,TIP_SIZE)
+				this.vertex = new Unity.Mathematics.float2x2(
+					new Unity.Mathematics.float2(0.0f,0.0f),
+					new Unity.Mathematics.float2(TIP_SIZE,TIP_SIZE)
 				);
 
 				//８ｘ８。
@@ -114,7 +114,6 @@ namespace BlueBack.Gl.Samples.ReSize
 								t_spritebuffer.color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f);
 
 								BlueBack.Gl.SpriteTool.SetVertex(ref t_spritebuffer,in this.vertex,in t_item.offset,in this.gl.screenparam);
-
 								BlueBack.Gl.SpriteTool.SetTexcord(ref t_spritebuffer,in this.texcord);
 							}
 

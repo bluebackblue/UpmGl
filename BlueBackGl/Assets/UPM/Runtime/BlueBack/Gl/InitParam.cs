@@ -51,14 +51,17 @@ namespace BlueBack.Gl
 		*/
 		public float camera_orthographic_size;
 
+		/** camera_hdr
+		*/
+		public bool camera_hdr;
+
+		/** camera_msaa
+		*/
+		public bool camera_msaa;
+
 		/** screenparam
 		*/
 		public ScreenParam screenparam;
-
-		/** renderbuffer
-		*/
-		public UnityEngine.RenderBuffer renderbuffer_color;
-		public UnityEngine.RenderBuffer renderbuffer_depth;
 
 		/** CreateDefault
 		*/
@@ -74,6 +77,8 @@ namespace BlueBack.Gl
 				camera_clearflag = UnityEngine.CameraClearFlags.SolidColor,
 				camera_bgcolor = new UnityEngine.Color(0.0f,0.0f,0.0f,1.0f),
 				camera_orthographic_size = 5.0f,
+				camera_hdr = false,
+				camera_msaa = false,
 				screenparam = ScreenTool.CreateScreenParamWidthStretch(1280,720,UnityEngine.Screen.width,UnityEngine.Screen.height),
 			};
 		}

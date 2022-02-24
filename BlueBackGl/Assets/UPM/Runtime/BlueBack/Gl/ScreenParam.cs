@@ -11,13 +11,13 @@
 */
 namespace BlueBack.Gl
 {
-				/** ScreenParam
-				*/
+	/** ScreenParam
+	*/
 	#if(UNITY_EDITOR)
 	[System.Serializable]
 	#endif
-				public struct ScreenParam
-				{
+	public struct ScreenParam
+	{
 		/** 仮想サイズ。
 		*/
 		public float virtual_w;
@@ -32,6 +32,6 @@ namespace BlueBack.Gl
 		*/
 		public Unity.Mathematics.float2 calc_wh;
 		public Unity.Mathematics.float2 calc_xy;
-				}
+	}
 }
 
