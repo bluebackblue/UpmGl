@@ -28,14 +28,17 @@ namespace BlueBack.Gl.Samples.Rotation
 		*/
 		public UnityEngine.Material material;
 
+		/** vertex
+		*/
+		public Unity.Mathematics.float2x2 vertex;
+
 		/** texcord
 		*/
-		public UnityEngine.Vector2 texcord_0;
-		public UnityEngine.Vector2 texcord_1;
+		public Unity.Mathematics.float2x2 texcord;
 
 		/** offset
 		*/
-		public UnityEngine.Vector2 offset;
+		public Unity.Mathematics.float2 offset;
 
 		/** Awake
 		*/
@@ -76,12 +79,20 @@ namespace BlueBack.Gl.Samples.Rotation
 				//material
 				this.material = new UnityEngine.Material(this.shader);
 
+				//vertex
+				this.vertex = new Unity.Mathematics.float2x2(
+					new Unity.Mathematics.float2(-100.0f,-100.0f),
+					new Unity.Mathematics.float2(100.0f,100.0f)
+				);
+
 				//texcord
-				this.texcord_0 = new UnityEngine.Vector2(0.0f,0.0f);
-				this.texcord_1 = new UnityEngine.Vector2(1.0f,1.0f);
+				this.texcord = new Unity.Mathematics.float2x2(
+					new Unity.Mathematics.float2(0.0f,0.0f),
+					new Unity.Mathematics.float2(1.0f,1.0f)
+				);
 
 				//offset
-				this.offset = new UnityEngine.Vector2(1280 / 2,720 / 2);
+				this.offset = new Unity.Mathematics.float2(1280 / 2,720 / 2);
 
 				//materialexecutelist
 				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,this.material);
@@ -106,25 +117,17 @@ namespace BlueBack.Gl.Samples.Rotation
 		*/
 		public void Update()
 		{
-			this.angle += UnityEngine.Time.deltaTime * 10;
+			this.angle += UnityEngine.Time.deltaTime;
 
 			ref BlueBack.Gl.SpriteBuffer t_spritebuffer = ref this.spriteindex.GetSpriteBuffer();
 
-			BlueBack.Gl.SpriteTool.SetTexcord(
-				ref t_spritebuffer,Unity.Mathematics.math.float2x2(
-					Unity.Mathematics.math.float2(this.texcord_0),
-					Unity.Mathematics.math.float2(this.texcord_1)
-				)
-			);
+			BlueBack.Gl.SpriteTool.SetTexcord(ref t_spritebuffer,in this.texcord);
 
 			BlueBack.Gl.SpriteTool.SetVertex(
 				ref t_spritebuffer,
-				Unity.Mathematics.math.float2x2(
-					Unity.Mathematics.math.float2(-100.0f,-100.0f),
-					Unity.Mathematics.math.float2(100.0f,100.0f)
-				),
-				Unity.Mathematics.math.float2(this.offset),
-				UnityEngine.Quaternion.AngleAxis(this.angle,new UnityEngine.Vector3(0.0f,0.0f,1.0f)),
+				in this.vertex,
+				in this.offset,
+				Unity.Mathematics.quaternion.AxisAngle(new UnityEngine.Vector3(0.0f,0.0f,1.0f),this.angle),
 				in this.gl.screenparam
 			);
 		}

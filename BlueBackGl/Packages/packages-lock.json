@@ -42,6 +42,15 @@
       "dependencies": {},
       "hash": "15d89d5725d5750b8520b4b6f9e447a3e513de38"
     },
+    "com.unity.burst": {
+      "version": "1.6.4",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.mathematics": "1.2.1"
+      },
+      "url": "https://packages.unity.com"
+    },
     "com.unity.ext.nunit": {
       "version": "1.0.6",
       "depth": 2,

@@ -6,6 +6,7 @@
     "blueback.poollist": "https://github.com/bluebackblue/UpmPoolList.git?path=BlueBackPoolList/Assets/UPM#0.0.2",
     "blueback.unityplayerloop": "https://github.com/bluebackblue/UpmUnityPlayerLoop.git?path=BlueBackUnityPlayerLoop/Assets/UPM",
     "blueback.versionmanager": "https://github.com/bluebackblue/UpmVersionManager.git?path=BlueBackVersionManager/Assets/UPM",
+    "com.unity.burst": "1.6.4",
     "com.unity.ide.visualstudio": "2.0.14",
     "com.unity.mathematics": "1.2.5",
     "com.unity.modules.ai": "1.0.0",
