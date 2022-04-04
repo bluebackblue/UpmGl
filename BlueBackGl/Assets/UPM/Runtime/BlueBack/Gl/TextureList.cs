@@ -26,7 +26,7 @@ namespace BlueBack.Gl
 			this.list = new UnityEngine.Texture[a_initparam.texture_max];
 		}
 
-		/** [IDisposable]破棄。
+		/** [System.IDisposable]破棄。
 		*/
 		public void Dispose()
 		{

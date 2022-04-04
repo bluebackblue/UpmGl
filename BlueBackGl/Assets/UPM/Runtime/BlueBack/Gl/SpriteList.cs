@@ -19,6 +19,16 @@ namespace BlueBack.Gl
 		*/
 		public Gl gl;
 
+		/** index
+		*/
+		public int index;
+
+		/** debugview_disable
+		*/
+		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+		public readonly bool debugview_disable;
+		#endif
+
 		/** buffer
 		*/
 		public SpriteBuffer[] buffer;
@@ -33,24 +43,36 @@ namespace BlueBack.Gl
 
 		/** constructor
 		*/
-		public SpriteList(in InitParam a_initparam,Gl a_gl)
+		public SpriteList(in InitParam a_initparam,Gl a_gl,int a_index)
 		{
 			//gl
 			this.gl = a_gl;
 
+			//index
+			this.index = a_index;
+
+			//debugview
+			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+			this.debugview_disable = a_initparam.spritelist[a_index].debugview_disable;
+			#endif
+
 			//buffer
-			this.buffer = new SpriteBuffer[a_initparam.sprite_max];
+			this.buffer = new SpriteBuffer[a_initparam.spritelist[a_index].sprite_max];
 
 			//list
 			this.list = new PoolList.BufferList<SpriteIndex,SpriteBuffer>(this.buffer,()=>{
+				#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+				return new SpriteIndex(this,this.debugview_disable);
+				#else
 				return new SpriteIndex(this);
+				#endif
 			});
 
 			//materialexecutelist
 			this.materialexecutelist = a_gl.materialexecutelist.list;
 		}
 
-		/** [IDisposable]Dispose。
+		/** [System.IDisposable]Dispose。
 		*/
 		public void Dispose()
 		{

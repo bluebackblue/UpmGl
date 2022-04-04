@@ -57,13 +57,17 @@ namespace BlueBack.Gl
 
 		/** constructor
 		*/
+		#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+		public SpriteIndex(SpriteList a_spritelist,bool a_debugview_disable)
+		#else
 		public SpriteIndex(SpriteList a_spritelist)
+		#endif
 		{
 			//spritelist
 			this.spritelist = a_spritelist;
 
 			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-			{
+			if(a_debugview_disable == false){
 				this.debugview_gameobject = new UnityEngine.GameObject("sprite");
 				this.debugview_monobehaviour = this.debugview_gameobject.AddComponent<Sprite_DebugView_MonoBehaviour>();
 				this.debugview_gameobject.SetActive(false);

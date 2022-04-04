@@ -15,9 +15,24 @@ namespace BlueBack.Gl
 	*/
 	public struct InitParam
 	{
-		/** spritelist_max
+		/** SpriteList
 		*/
-		public int spritelist_max;
+		public struct SpriteList
+		{
+			/** sprite_max
+			*/
+			public int sprite_max;
+
+			/** debugview_disable
+			*/
+			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+			public bool debugview_disable;
+			#endif
+		}
+
+		/** spritelist
+		*/
+		public SpriteList[] spritelist;
 
 		/** texture_max
 		*/
@@ -26,10 +41,6 @@ namespace BlueBack.Gl
 		/** material_max
 		*/
 		public int material_max;
-
-		/** sprite_max
-		*/
-		public int sprite_max;
 
 		/** camera_depth
 		*/
@@ -68,10 +79,23 @@ namespace BlueBack.Gl
 		public static InitParam CreateDefault()
 		{
 			return new InitParam(){
-				spritelist_max = 2,
+				spritelist = new SpriteList[]{
+					new SpriteList(){
+						sprite_max = 128,
+						#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+						debugview_disable = false,
+						#endif
+
+					},
+					new SpriteList(){
+						sprite_max = 128,
+						#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+						debugview_disable = false,
+						#endif
+					}
+				},
 				texture_max = 10,
 				material_max = 10,
-				sprite_max = 128,
 				camera_depth = 0.0f,
 				camera_cullingmask = 0,
 				camera_clearflag = UnityEngine.CameraClearFlags.SolidColor,

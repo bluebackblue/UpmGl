@@ -26,7 +26,7 @@ namespace BlueBack.Gl
 			this.list = new MaterialExecute_Base[a_initparam.material_max];
 		}
 
-		/** [IDisposable]Dispose。
+		/** [System.IDisposable]Dispose。
 		*/
 		public void Dispose()
 		{

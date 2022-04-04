@@ -50,9 +50,9 @@ namespace BlueBack.Gl
 			this.materialexecutelist = new MaterialExecuteList(in a_initparam);
 
 			//spritelist
-			this.spritelist = new SpriteList[a_initparam.spritelist_max];
+			this.spritelist = new SpriteList[a_initparam.spritelist.Length];
 			for(int ii=0;ii<this.spritelist.Length;ii++){
-				this.spritelist[ii] = new SpriteList(in a_initparam,this);
+				this.spritelist[ii] = new SpriteList(in a_initparam,this,ii);
 			}
 
 			//gameobject
@@ -80,7 +80,7 @@ namespace BlueBack.Gl
 			t_gl_monobehaviour.spritelist = this.spritelist;
 		}
 
-		/** [IDisposable]Dispose。
+		/** [System.IDisposable]Dispose。
 		*/
 		public void Dispose()
 		{
