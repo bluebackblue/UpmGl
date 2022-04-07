@@ -60,10 +60,22 @@ namespace BlueBack.Gl.Samples.ReSize
 			{
 				BlueBack.Gl.InitParam t_initparam = BlueBack.Gl.InitParam.CreateDefault();
 				{
-					t_initparam.spritelist_max = 2;
+					t_initparam.spritelist = new InitParam.SpriteList[]{
+						new InitParam.SpriteList(){
+							sprite_max = 100,
+							#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+							debugview_disable = false,
+							#endif
+						},
+						new InitParam.SpriteList(){
+							sprite_max = 100,
+							#if(DEF_BLUEBACK_GL_DEBUGVIEW)
+							debugview_disable = false,
+							#endif
+						}
+					};
 					t_initparam.texture_max = 2;
 					t_initparam.material_max = 2;
-					t_initparam.sprite_max = 100;
 					t_initparam.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(VIRTUAL_SCREEN_W,VIRTUAL_SCREEN_H,this.rendertexture_w,this.rendertexture_h);
 				}
 				this.gl = new BlueBack.Gl.Gl(in t_initparam);

@@ -48,10 +48,16 @@ namespace BlueBack.Gl.Samples.Rotation
 			{
 				BlueBack.Gl.InitParam t_initparam = BlueBack.Gl.InitParam.CreateDefault();
 				{
-					t_initparam.spritelist_max = 2;
+					t_initparam.spritelist = new InitParam.SpriteList[]{
+						new InitParam.SpriteList(){
+							sprite_max = 10,
+						},
+						new InitParam.SpriteList(){
+							sprite_max = 10,
+						}
+					};
 					t_initparam.texture_max = 2;
 					t_initparam.material_max = 2;
-					t_initparam.sprite_max = 10;
 					t_initparam.screenparam = BlueBack.Gl.ScreenTool.CreateScreenParamWidthStretch(1280,720,UnityEngine.Screen.width,UnityEngine.Screen.height);
 				}
 				this.gl = new BlueBack.Gl.Gl(in t_initparam);
