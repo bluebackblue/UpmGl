@@ -170,6 +170,20 @@ MonoBehaviour:
   angle: 0
   shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
   material: {fileID: 0}
-  texcord_0: {x: 0, y: 0}
-  texcord_1: {x: 0, y: 0}
-  offset: {x: 0, y: 0}
+  vertex:
+    c0:
+      x: 0
+      y: 0
+    c1:
+      x: 0
+      y: 0
+  texcord:
+    c0:
+      x: 0
+      y: 0
+    c1:
+      x: 0
+      y: 0
+  offset:
+    x: 0
+    y: 0

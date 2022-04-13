@@ -30,8 +30,10 @@ namespace BlueBack.Gl
 
 		/** 計算用。
 		*/
+		#if(ASMDEF_UNITY_MATHEMATICS)
 		public Unity.Mathematics.float2 calc_wh;
 		public Unity.Mathematics.float2 calc_xy;
+		#endif
 	}
 }
 

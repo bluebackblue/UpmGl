@@ -28,16 +28,23 @@ namespace BlueBack.Gl
 			{
 				virtual_w = a_virtual_w,
 				virtual_h = a_virtual_h,
+
 				rendertexture_w = a_rendertexture_w,
 				rendertexture_h = a_rendertexture_h,
+
+				#if(ASMDEF_UNITY_MATHEMATICS)
+
 				calc_wh = new Unity.Mathematics.float2(
 					1.0f * t_virtual_w_inv,
 					- t_use_ypix * t_rendertexture_h_inv * t_virtual_h_inv
 				),
+
 				calc_xy = new Unity.Mathematics.float2(
 					0.0f,
 					1.0f - (a_rendertexture_h - t_use_ypix) * 0.5f * t_rendertexture_h_inv
-				)
+				),
+
+				#endif
 			};
 		}
 	}

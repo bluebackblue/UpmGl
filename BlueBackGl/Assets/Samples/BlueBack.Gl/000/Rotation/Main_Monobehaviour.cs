@@ -2,6 +2,7 @@
 
 /** BlueBack.Gl.Samples.Rotation
 */
+#if(!DEF_BLUEBACK_GL_SAMPLES_DISABLE)
 namespace BlueBack.Gl.Samples.Rotation
 {
 	/** Main_Monobehaviour
@@ -149,4 +150,5 @@ namespace BlueBack.Gl.Samples.Rotation
 		}
 	}
 }
+#endif
 

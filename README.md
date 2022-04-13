@@ -1,5 +1,6 @@
 # BlueBack.Gl
-スプライト表示
+ＧＬ操作
+* スプライト表示
 
 ## ライセンス
 MIT License

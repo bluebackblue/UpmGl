@@ -2,6 +2,7 @@
 
 /** BlueBack.Gl.Samples.ReSize
 */
+#if(!DEF_BLUEBACK_GL_SAMPLES_DISABLE)
 namespace BlueBack.Gl.Samples.ReSize
 {
 	/** Main_Monobehaviour
@@ -171,4 +172,5 @@ namespace BlueBack.Gl.Samples.ReSize
 		}
 	}
 }
+#endif
 
