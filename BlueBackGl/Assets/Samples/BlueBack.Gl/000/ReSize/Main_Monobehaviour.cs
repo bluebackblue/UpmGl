@@ -82,12 +82,12 @@ namespace BlueBack.Gl.Samples.ReSize
 				this.gl = new BlueBack.Gl.Gl(in t_initparam);
 
 				//texturelist
-				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("ReSize/Red");
-				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("ReSize/Green");
+				this.gl.texturelist.list[0] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("BlueBack.Gl.Samples.ReSize/Red");
+				this.gl.texturelist.list[1] = UnityEngine.Resources.Load<UnityEngine.Texture2D>("BlueBack.Gl.Samples.ReSize/Green");
 
 				//materialexecutelist
-				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("ReSize/Opaque"));
-				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("ReSize/Transparent"));
+				this.gl.materialexecutelist.list[0] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("BlueBack.Gl.Samples.ReSize/Opaque"));
+				this.gl.materialexecutelist.list[1] = new BlueBack.Gl.MaterialExecute_SImple(this.gl,UnityEngine.Resources.Load<UnityEngine.Material>("BlueBack.Gl.Samples.ReSize/Transparent"));
 			}
 
 			{
