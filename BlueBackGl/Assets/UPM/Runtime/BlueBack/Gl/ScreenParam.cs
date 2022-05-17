@@ -7,6 +7,15 @@
 */
 
 
+/** define
+*/
+#if(ASMDEF_UNITY_MATHEMATICS)
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl
@@ -30,7 +39,7 @@ namespace BlueBack.Gl
 
 		/** 計算用。
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public Unity.Mathematics.float2 calc_wh;
 		public Unity.Mathematics.float2 calc_xy;
 		#endif

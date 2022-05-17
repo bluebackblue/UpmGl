@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   angle: 0
-  shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 0}
+  shader: {fileID: 10752, guid: 0000000000000000f000000000000000, type: 3}
   material: {fileID: 0}
   vertex:
     c0:

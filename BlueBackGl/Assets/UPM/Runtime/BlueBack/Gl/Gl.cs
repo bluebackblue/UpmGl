@@ -7,6 +7,15 @@
 */
 
 
+/** define
+*/
+#if((ASMDEF_BLUEBACK_POOLLIST)||(USERDEF_BLUEBACK_POOLLIST))
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl

@@ -7,6 +7,15 @@
 */
 
 
+/** define
+*/
+#if(ASMDEF_UNITY_MATHEMATICS)
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl
@@ -45,7 +54,7 @@ namespace BlueBack.Gl
 
 		/** SetTexcord
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetTexcord(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_texcord)
 		{
 			a_spritebuffer.texcord.c0 = a_texcord.c0;
@@ -59,7 +68,7 @@ namespace BlueBack.Gl
 
 		/** SetVertex。２頂点。
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in ScreenParam a_screenparam)
 		{
 			Unity.Mathematics.float2 t_c0 = a_vertex.c0 * a_screenparam.calc_wh + a_screenparam.calc_xy;
@@ -79,7 +88,7 @@ namespace BlueBack.Gl
 			a_offset : オフセット。
 
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in Unity.Mathematics.float2 a_offset,in ScreenParam a_screenparam)
 		{
 			Unity.Mathematics.float2 t_c0 = (a_vertex.c0 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy;
@@ -100,7 +109,7 @@ namespace BlueBack.Gl
 			a_quaternion	: 回転。
 
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x2 a_vertex,in Unity.Mathematics.float2 a_offset,in Unity.Mathematics.quaternion a_quaternion,in ScreenParam a_screenparam)
 		{
 			Unity.Mathematics.float2 t_c0 = Unity.Mathematics.math.mul(a_quaternion,Unity.Mathematics.math.float3(a_vertex.c0,0.0f)).xy + a_offset;
@@ -117,7 +126,7 @@ namespace BlueBack.Gl
 
 		/** SetVertex。４頂点。
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in ScreenParam a_screenparam)
 		{
 			a_spritebuffer.vertex.c0 = a_vertex.c0 * a_screenparam.calc_wh + a_screenparam.calc_xy;
@@ -132,7 +141,7 @@ namespace BlueBack.Gl
 			a_offset : オフセット。
 
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in Unity.Mathematics.float2 a_offset,in ScreenParam a_screenparam)
 		{
 			a_spritebuffer.vertex.c0 = (a_vertex.c0 + a_offset) * a_screenparam.calc_wh + a_screenparam.calc_xy;
@@ -148,7 +157,7 @@ namespace BlueBack.Gl
 			a_quaternion	: 回転。
 
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public static void SetVertex(ref SpriteBuffer a_spritebuffer,in Unity.Mathematics.float2x4 a_vertex,in Unity.Mathematics.float2 a_offset,in UnityEngine.Quaternion a_quaternion,in ScreenParam a_screenparam)
 		{
 			Unity.Mathematics.float2 t_c0 = Unity.Mathematics.math.float3(a_quaternion * Unity.Mathematics.math.float3(a_vertex.c0,0.0f)).xy + a_offset;

@@ -7,6 +7,15 @@
 */
 
 
+/** define
+*/
+#if(ASMDEF_UNITY_MATHEMATICS)
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl
@@ -124,13 +133,13 @@ namespace BlueBack.Gl
 		/** Read
 		*/
 		private void Read(ref SpriteBuffer a_spritebuffer)
+		#if(ASMDEF_TRUE)
 		{
 			this.visible = a_spritebuffer.visible;
 			this.material_index = a_spritebuffer.material_index;
 			this.texture_index = a_spritebuffer.texture_index;
 			this.color = a_spritebuffer.color;
 
-			#if(ASMDEF_UNITY_MATHEMATICS)
 			{
 				this.texcord_x0 = a_spritebuffer.texcord.c0.x;
 				this.texcord_y0 = a_spritebuffer.texcord.c0.y;
@@ -149,9 +158,7 @@ namespace BlueBack.Gl
 				this.vertex_x3 = a_spritebuffer.vertex.c3.x;
 				this.vertex_y3 = a_spritebuffer.vertex.c3.y;
 			}
-			#endif
 
-			#if(ASMDEF_UNITY_MATHEMATICS)
 			{
 				ref ScreenParam t_screenparam = ref this.spriteindex.spritelist.gl.screenparam;
 				this.virtual_x0 = (a_spritebuffer.vertex.c0.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
@@ -163,19 +170,23 @@ namespace BlueBack.Gl
 				this.virtual_x3 = (a_spritebuffer.vertex.c3.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
 				this.virtual_y3 = (a_spritebuffer.vertex.c3.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
 			}
-			#endif
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 
 		/** Write
 		*/
 		private void Write(ref SpriteBuffer a_spritebuffer)
+		#if(ASMDEF_TRUE)
 		{
 			a_spritebuffer.visible = this.visible;
 			a_spritebuffer.material_index = this.material_index;
 			a_spritebuffer.texture_index = this.texture_index;
 			a_spritebuffer.color = this.color;
 
-			#if(ASMDEF_UNITY_MATHEMATICS)
 			{
 				a_spritebuffer.texcord.c0.x = this.texcord_x0;
 				a_spritebuffer.texcord.c0.y = this.texcord_y0;
@@ -194,9 +205,7 @@ namespace BlueBack.Gl
 				a_spritebuffer.vertex.c3.x = this.vertex_x3;
 				a_spritebuffer.vertex.c3.y = this.vertex_y3;
 			}
-			#endif
 
-			#if(ASMDEF_UNITY_MATHEMATICS)
 			{
 				ref ScreenParam t_screenparam = ref this.spriteindex.spritelist.gl.screenparam;
 				this.virtual_x0 = (a_spritebuffer.vertex.c0.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
@@ -208,8 +217,12 @@ namespace BlueBack.Gl
 				this.virtual_x3 = (a_spritebuffer.vertex.c3.x - t_screenparam.calc_xy.x) / t_screenparam.calc_wh.x;
 				this.virtual_y3 = (a_spritebuffer.vertex.c3.y - t_screenparam.calc_xy.y) / t_screenparam.calc_wh.y;
 			}
-			#endif
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 	}
 	#endif
 }

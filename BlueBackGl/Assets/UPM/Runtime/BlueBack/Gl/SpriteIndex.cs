@@ -7,13 +7,26 @@
 */
 
 
+/** define
+*/
+#if((ASMDEF_BLUEBACK_POOLLIST)||(USERDEF_BLUEBACK_POOLLIST))
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl
 {
 	/** SpriteIndex
 	*/
+	#if(ASMDEF_TRUE)
 	public class SpriteIndex : BlueBack.PoolList.BufferList_Item_Base , System.IDisposable
+	#else
+	public class SpriteIndex : System.IDisposable
+	#endif
 	{
 		/** index
 		*/

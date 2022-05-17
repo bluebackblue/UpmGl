@@ -7,6 +7,15 @@
 */
 
 
+/** define
+*/
+#if((ASMDEF_BLUEBACK_POOLLIST)||(USERDEF_BLUEBACK_POOLLIST))
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
+#endif
+
+
 /** BlueBack.Gl
 */
 namespace BlueBack.Gl
@@ -35,7 +44,9 @@ namespace BlueBack.Gl
 
 		/** list
 		*/
+		#if(ASMDEF_TRUE)
 		public BlueBack.PoolList.BufferList<SpriteIndex,SpriteBuffer> list;
+		#endif
 
 		/** materialexecutelist
 		*/
@@ -44,6 +55,7 @@ namespace BlueBack.Gl
 		/** constructor
 		*/
 		public SpriteList(in InitParam a_initparam,Gl a_gl,int a_index)
+		#if(ASMDEF_TRUE)
 		{
 			//gl
 			this.gl = a_gl;
@@ -71,10 +83,16 @@ namespace BlueBack.Gl
 			//materialexecutelist
 			this.materialexecutelist = a_gl.materialexecutelist.list;
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 
 		/** [System.IDisposable]Dispose。
 		*/
 		public void Dispose()
+		#if(ASMDEF_TRUE)
 		{
 			foreach(SpriteIndex t_spriteindex in this.list.list_free){
 				t_spriteindex.Dispose();
@@ -83,10 +101,16 @@ namespace BlueBack.Gl
 				t_spriteindex.Dispose();
 			}
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 
 		/** CreateSprite
 		*/
 		public SpriteIndex CreateSprite()
+		#if(ASMDEF_TRUE)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 
@@ -104,22 +128,24 @@ namespace BlueBack.Gl
 					material_index = -1,
 					texture_index = -1,
 					color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
-
-					#if(ASMDEF_UNITY_MATHEMATICS)
-
 					texcord = Unity.Mathematics.float2x4.zero,
 					vertex = Unity.Mathematics.float2x4.zero,
-
-					#endif
 				};
 			}
 
 			return t_node.Value;
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+			return null;
+		}
+		#endif
 
 		/** CreateSprite
 		*/
 		public SpriteIndex CreateSprite(bool a_visible,int a_material_index,int a_texture_index)
+		#if(ASMDEF_TRUE)
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 
@@ -137,22 +163,24 @@ namespace BlueBack.Gl
 					material_index = a_material_index,
 					texture_index = a_texture_index,
 					color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f),
-
-					#if(ASMDEF_UNITY_MATHEMATICS)
-
 					texcord = Unity.Mathematics.float2x4.zero,
 					vertex = Unity.Mathematics.float2x4.zero,
-
-					#endif
 				};
 			}
 
 			return t_node.Value;
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+			return null;
+		}
+		#endif
 
 		/** DeleteSprite
 		*/
 		public void DeleteSprite(SpriteIndex a_spriteindex)
+		#if(ASMDEF_TRUE)
 		{
 			#if(DEF_BLUEBACK_GL_DEBUGVIEW)
 			a_spriteindex.SetDebugViewActive(false);
@@ -162,10 +190,16 @@ namespace BlueBack.Gl
 
 			a_spriteindex.node = null;
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 
 		/** UnityPostRender
 		*/
 		public void UnityPostRender()
+		#if(ASMDEF_TRUE)
 		{
 			int t_current_material_index = -1;
 			bool t_is_begin = false;
@@ -205,21 +239,17 @@ namespace BlueBack.Gl
 							if(t_is_begin == true){
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
-								#if(ASMDEF_UNITY_MATHEMATICS)
-								{
-									UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c0.x,this.buffer[ii].texcord.c0.y);
-									UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c0.x,this.buffer[ii].vertex.c0.y,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c0.x,this.buffer[ii].texcord.c0.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c0.x,this.buffer[ii].vertex.c0.y,0.0f);
 
-									UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c1.x,this.buffer[ii].texcord.c1.y);
-									UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c1.x,this.buffer[ii].vertex.c1.y,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c1.x,this.buffer[ii].texcord.c1.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c1.x,this.buffer[ii].vertex.c1.y,0.0f);
 
-									UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c2.x,this.buffer[ii].texcord.c2.y);
-									UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c2.x,this.buffer[ii].vertex.c2.y,0.0f);
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c2.x,this.buffer[ii].texcord.c2.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c2.x,this.buffer[ii].vertex.c2.y,0.0f);
 
-									UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c3.x,this.buffer[ii].texcord.c3.y);
-									UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c3.x,this.buffer[ii].vertex.c3.y,0.0f);
-								}
-								#endif
+								UnityEngine.GL.TexCoord2(this.buffer[ii].texcord.c3.x,this.buffer[ii].texcord.c3.y);
+								UnityEngine.GL.Vertex3(this.buffer[ii].vertex.c3.x,this.buffer[ii].vertex.c3.y,0.0f);
 							}
 						}
 					}
@@ -232,6 +262,11 @@ namespace BlueBack.Gl
 				UnityEngine.GL.PopMatrix();
 			}
 		}
+		#else
+		{
+			#warning "ASMDEF_TRUE"
+		}
+		#endif
 	}
 }
 

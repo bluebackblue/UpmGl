@@ -17,11 +17,11 @@ MIT License
 * https://docs.unity3d.com/Packages/com.unity.mathematics@latest/index.html
 
 ## 動作確認
-Unity 2022.1.0b12
+Unity 2022.1.0b16
 
 ## UPM
 ### 最新
-* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.18
+* https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM#0.0.19
 ### 開発
 * https://github.com/bluebackblue/UpmGl.git?path=BlueBackGl/Assets/UPM
 

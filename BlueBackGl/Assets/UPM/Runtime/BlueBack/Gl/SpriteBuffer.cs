@@ -7,8 +7,12 @@
 */
 
 
-#if(!ASMDEF_UNITY_MATHEMATICS)
-#warning "Installing Required Package : com.unity.mathematics"
+/** define
+*/
+#if(ASMDEF_UNITY_MATHEMATICS)
+#define ASMDEF_TRUE
+#else
+#warning "ASMDEF_TRUE"
 #endif
 
 
@@ -22,13 +26,13 @@ namespace BlueBack.Gl
 	{
 		/** texcord
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public Unity.Mathematics.float2x4 texcord;
 		#endif
 
 		/** vertex
 		*/
-		#if(ASMDEF_UNITY_MATHEMATICS)
+		#if(ASMDEF_TRUE)
 		public Unity.Mathematics.float2x4 vertex;
 		#endif
 

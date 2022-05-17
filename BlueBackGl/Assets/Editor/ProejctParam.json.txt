@@ -36,7 +36,7 @@
 				"mode":"package",
 				"package_fullname":"BlueBack.PoolList",
 				"url":"https://github.com/bluebackblue/UpmUnityPoolList",
-				"define_package_pathname":"blueback.poolist"
+				"define_package_pathname":"blueback.poollist"
 			},
 			{
 				"mode":"package",
