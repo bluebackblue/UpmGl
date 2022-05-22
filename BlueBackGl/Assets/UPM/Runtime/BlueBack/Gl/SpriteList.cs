@@ -235,7 +235,6 @@ namespace BlueBack.Gl
 								t_is_begin = true;
 							}
 
-							
 							if(t_is_begin == true){
 								UnityEngine.GL.Color(this.buffer[ii].color);
 
