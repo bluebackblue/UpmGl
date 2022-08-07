@@ -23,7 +23,7 @@ namespace BlueBack.Gl
 	/** Sprite_DebugView_MonoBehaviour
 	*/
 	#if(DEF_BLUEBACK_GL_DEBUGVIEW)
-	public class Sprite_DebugView_MonoBehaviour : UnityEngine.MonoBehaviour
+	public sealed class Sprite_DebugView_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		/** Mode
 		*/

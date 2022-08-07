@@ -7,7 +7,7 @@
 	"discription_simple":"ＧＬ操作",
 	"discription_detal":[
 		"ＧＬ操作",
-		"* スプライト表示",
+		"* スプライト表示"
 	],
 	"keyword":[
 		"gl"

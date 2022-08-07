@@ -13,12 +13,10 @@ namespace BlueBack.Gl
 {
 	/** MaterialExecute_SImple
 
-		_MainTex
-
-		SetPass(0)
+		マテリアルに _MainTex / SetPass(0) が必要。
 
 	*/
-	public class MaterialExecute_SImple : MaterialExecute_Base
+	public sealed class MaterialExecute_SImple : MaterialExecute_Base
 	{
 		/** current_texture_index
 		*/

@@ -23,9 +23,9 @@ namespace BlueBack.Gl
 	/** SpriteIndex
 	*/
 	#if(ASMDEF_TRUE)
-	public class SpriteIndex : BlueBack.PoolList.BufferList_Item_Base , System.IDisposable
+	public sealed class SpriteIndex : BlueBack.PoolList.BufferList_Item_Base , System.IDisposable
 	#else
-	public class SpriteIndex : System.IDisposable
+	public sealed class SpriteIndex : System.IDisposable
 	#endif
 	{
 		/** index

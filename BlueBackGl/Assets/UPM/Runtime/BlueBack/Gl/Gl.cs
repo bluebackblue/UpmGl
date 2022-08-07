@@ -94,14 +94,18 @@ namespace BlueBack.Gl
 		public void Dispose()
 		{
 			//texturelist
-			this.texturelist.Dispose();
-			this.texturelist = null;
+			if(this.texturelist != null){
+				this.texturelist.Dispose();
+				this.texturelist = null;
+			}
 
 			//spritelist
-			foreach(SpriteList t_spritelist in this.spritelist){
-				t_spritelist.Dispose();
+			if(this.spritelist != null){
+				foreach(SpriteList t_spritelist in this.spritelist){
+					t_spritelist.Dispose();
+				}
+				this.spritelist = null;
 			}
-			this.spritelist = null;
 
 			if(this.gameobject != null){
 				UnityEngine.GameObject.Destroy(this.gameobject);

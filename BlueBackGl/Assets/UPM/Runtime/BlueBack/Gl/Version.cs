@@ -21,7 +21,7 @@ namespace BlueBack.Gl
 
 		/** packageversion
 		*/
-		public const string packageversion = "0.0.20";
+		public const string packageversion = "0.0.21";
 
 		/** GetPackageVersion
 		*/
