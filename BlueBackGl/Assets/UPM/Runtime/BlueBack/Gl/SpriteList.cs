@@ -114,7 +114,7 @@ namespace BlueBack.Gl
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 
-			#if(DEF_BLUEBACK_ASSERT)
+			#if(DEF_BLUEBACK_DEBUG_ASSERT)
 			DebugTool.Assert(t_node != null,"node == null");
 			#endif
 
@@ -153,7 +153,7 @@ namespace BlueBack.Gl
 		{
 			System.Collections.Generic.LinkedListNode<SpriteIndex> t_node = this.list.Create();
 
-			#if(DEF_BLUEBACK_ASSERT)
+			#if(DEF_BLUEBACK_DEBUG_ASSERT)
 			DebugTool.Assert(t_node != null,"node == null");
 			#endif
 
@@ -225,7 +225,7 @@ namespace BlueBack.Gl
 							if(t_current_material_index != this.buffer[ii].material_index){
 								t_current_material_index = this.buffer[ii].material_index;
 
-								#if(DEF_BLUEBACK_ASSERT)
+								#if(DEF_BLUEBACK_DEBUG_ASSERT)
 								DebugTool.Assert(this.materialexecutelist[t_current_material_index] != null,"material == null");
 								#endif
 

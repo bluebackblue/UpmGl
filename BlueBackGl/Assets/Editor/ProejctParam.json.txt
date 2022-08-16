@@ -23,7 +23,9 @@
 	"root_readmemd_path":"../../README.md",
 	"need_unity_version":"2020.1",
 	"asmdef_runtime":{
-		"define_list":[
+		"define_constraint_list":[
+		],
+		"version_define_list":[
 			{
 				"mode":"package",
 				"package_pathname":"com.unity.mathematics",
@@ -43,11 +45,19 @@
 				"package_fullname":"Unity.Mathematics",
 				"url":"https://docs.unity3d.com/Packages/com.unity.mathematics@latest/index.html",
 				"define_package_pathname":"com.unity.mathematics"
+			},
+			{
+				"mode":"package",
+				"package_fullname":"BlueBack.Debug",
+				"url":"https://github.com/bluebackblue/UpmDebug",
+				"define_package_pathname":"blueback.debug"
 			}
 		]
 	},
 	"asmdef_editor":{
-		"define_list":[
+		"define_constraint_list":[
+		],
+		"version_define_list":[
 		],
 		"reference_list":[
 			{
@@ -59,7 +69,9 @@
 		]
 	},
 	"asmdef_sample":{
-		"define_list":[
+		"define_constraint_list":[
+		],
+		"version_define_list":[
 		],
 		"reference_list":[
 			{
