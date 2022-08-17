@@ -9,7 +9,7 @@
 
 /** define
 */
-#if(ASMDEF_UNITY_MATHEMATICS)
+#if(ASMDEF_COM_UNITY_MATHEMATICS)
 #define ASMDEF_TRUE
 #else
 #warning "ASMDEF_TRUE"
