@@ -47,7 +47,7 @@
 				"asmdef_reference_assembly":true,
 				"asmdef_version_define":true,
 				"package_dependence":false
-			},
+			}
 		]
 	},
 	"asmdef_editor":{
