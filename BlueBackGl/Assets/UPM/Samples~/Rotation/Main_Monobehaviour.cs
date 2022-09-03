@@ -113,7 +113,7 @@ namespace BlueBack.Gl.Samples.Rotation
 				t_spritebuffer.color = new UnityEngine.Color(1.0f,1.0f,1.0f,1.0f);
 				t_spritebuffer.material_index = 0;
 				t_spritebuffer.texture_index = 0;
-				t_spritebuffer.userdata = 0;
+				t_spritebuffer.userdata = null;
 			}
 
 			//angle

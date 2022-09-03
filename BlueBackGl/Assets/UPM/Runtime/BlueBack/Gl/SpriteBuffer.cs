@@ -50,7 +50,7 @@ namespace BlueBack.Gl
 
 		/** userdata
 		*/
-		public int userdata;
+		public UserData_Base userdata;
 
 		/** color
 		*/
