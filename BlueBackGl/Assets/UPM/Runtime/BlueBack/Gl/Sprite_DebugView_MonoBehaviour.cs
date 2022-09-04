@@ -173,7 +173,6 @@ namespace BlueBack.Gl
 		}
 		#else
 		{
-			#warning "ASMDEF_TRUE"
 		}
 		#endif
 
@@ -220,7 +219,6 @@ namespace BlueBack.Gl
 		}
 		#else
 		{
-			#warning "ASMDEF_TRUE"
 		}
 		#endif
 	}

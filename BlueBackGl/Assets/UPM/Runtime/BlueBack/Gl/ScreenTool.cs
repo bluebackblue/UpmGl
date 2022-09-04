@@ -56,8 +56,7 @@ namespace BlueBack.Gl
 		}
 		#else
 		{
-			#warning "ASMDEF_TRUE"
-			return new BlueBack.Gl.ScreenParam();
+			return default;
 		}
 		#endif
 	}
