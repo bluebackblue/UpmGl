@@ -12,7 +12,7 @@
       "depth": 0,
       "source": "git",
       "dependencies": {},
-      "hash": "c49204861606d7749db4cc335881882c74d169a0"
+      "hash": "f425f1eb28515dfeb2f2a1e3c1b2e8366d5771e7"
     },
     "blueback.debug": {
       "version": "https://github.com/bluebackblue/UpmDebug.git?path=BlueBackDebug/Assets/UPM",
