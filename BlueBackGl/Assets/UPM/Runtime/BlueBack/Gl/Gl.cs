@@ -65,7 +65,7 @@ namespace BlueBack.Gl
 			}
 
 			//gameobject
-			this.gameobject = new UnityEngine.GameObject("gl");
+			this.gameobject = new UnityEngine.GameObject(a_initparam.gameobject_name);
 			UnityEngine.GameObject.DontDestroyOnLoad(this.gameobject);
 
 			//camera
@@ -84,9 +84,9 @@ namespace BlueBack.Gl
 			//screenparam
 			this.screenparam = a_initparam.screenparam;
 
-			//gl_monobehaviour
-			Gl_MonoBehaviour t_gl_monobehaviour = this.gameobject.AddComponent<Gl_MonoBehaviour>();
-			t_gl_monobehaviour.spritelist = this.spritelist;
+			//unitycallback
+			UnityCallBack_MonoBehaviour t_unitycallback_monobehaviour = this.gameobject.AddComponent<UnityCallBack_MonoBehaviour>();
+			t_unitycallback_monobehaviour.spritelist = this.spritelist;
 		}
 
 		/** [System.IDisposable]Dispose。

@@ -74,6 +74,10 @@ namespace BlueBack.Gl
 		*/
 		public ScreenParam screenparam;
 
+		/** gameobject_name
+		*/
+		public string gameobject_name;
+
 		/** CreateDefault
 		*/
 		public static InitParam CreateDefault()
@@ -104,6 +108,7 @@ namespace BlueBack.Gl
 				camera_hdr = false,
 				camera_msaa = false,
 				screenparam = ScreenTool.CreateScreenParamWidthStretch(1280,720,UnityEngine.Screen.width,UnityEngine.Screen.height),
+				gameobject_name = "gl",
 			};
 		}
 	}

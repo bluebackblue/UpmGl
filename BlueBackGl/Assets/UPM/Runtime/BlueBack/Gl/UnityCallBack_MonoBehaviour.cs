@@ -11,9 +11,9 @@
 */
 namespace BlueBack.Gl
 {
-	/** Gl_MonoBehaviour
+	/** UnityCallBack_MonoBehaviour
 	*/
-	public sealed class Gl_MonoBehaviour : UnityEngine.MonoBehaviour
+	public sealed class UnityCallBack_MonoBehaviour : UnityEngine.MonoBehaviour
 	{
 		/** spritelist
 		*/
